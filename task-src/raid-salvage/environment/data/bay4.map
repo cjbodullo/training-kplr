@@ -1,0 +1,9 @@
+# Mapfile. Created by GNU ddrescue version 1.27
+# Command line: ddrescue -d -r3 /dev/sde bay4.img bay4.map
+# Start time:   2026-10-01 09:14:02
+# Current time: 2026-10-01 09:41:55
+# Finished
+# current_pos  current_status  current_pass
+0x00000000     +               3
+#      pos        size  status
+0x00000000  0x01100000  +

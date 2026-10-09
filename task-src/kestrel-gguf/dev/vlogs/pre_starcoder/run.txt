@@ -1,0 +1,355 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 23 items
+
+test_port.py::test_sealed_prompts_present PASSED                         [  4%]
+test_port.py::test_gguf_tensors_are_f32 PASSED                           [  8%]
+test_port.py::test_prompt[access_log] PASSED                             [ 13%]
+test_port.py::test_prompt[cpp_src] FAILED                                [ 17%]
+test_port.py::test_prompt[crime_max] FAILED                              [ 21%]
+test_port.py::test_prompt[csv_table] PASSED                              [ 26%]
+test_port.py::test_prompt[digit_run] PASSED                              [ 30%]
+test_port.py::test_prompt[dracula] FAILED                                [ 34%]
+test_port.py::test_prompt[emoji_only] PASSED                             [ 39%]
+test_port.py::test_prompt[empty] PASSED                                  [ 43%]
+test_port.py::test_prompt[hello] PASSED                                  [ 47%]
+test_port.py::test_prompt[json_blob] PASSED                              [ 52%]
+test_port.py::test_prompt[markdown] FAILED                               [ 56%]
+test_port.py::test_prompt[mixed_scripts] PASSED                          [ 60%]
+test_port.py::test_prompt[one_digit] PASSED                              [ 65%]
+test_port.py::test_prompt[python_src] FAILED                             [ 69%]
+test_port.py::test_prompt[quijote] PASSED                                [ 73%]
+test_port.py::test_prompt[sanguo] PASSED                                 [ 78%]
+test_port.py::test_prompt[shouting] PASSED                               [ 82%]
+test_port.py::test_prompt[trial] PASSED                                  [ 86%]
+test_port.py::test_prompt[ulysses] FAILED                                [ 91%]
+test_port.py::test_prompt[wallpaper] FAILED                              [ 95%]
+test_port.py::test_prompt[whitespace] FAILED                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_prompt[cpp_src] _____________________________
+
+prompt = '/tests/prompts/cpp_src.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 995 tokens, tokenizer.json gives 1000; first difference at 529
+E       assert [1, 312, 296,...735, 328, ...] == [1, 312, 296,...735, 328, ...]
+E         
+E         At index 529 diff: 326 != 223
+E         Right contains 5 more items, first extra item: 980
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (1015 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+____________________________ test_prompt[crime_max] ____________________________
+
+prompt = '/tests/prompts/crime_max.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+>       ids, logits = run_dumper(work, prompt)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+
+test_port.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+work = '/tmp/kestrel-grade-eq3irgka'
+prompt_path = '/tests/prompts/crime_max.txt'
+
+    def run_dumper(work, prompt_path):
+        name = os.path.basename(prompt_path)
+        txt = os.path.join(work, name)
+        shutil.copyfile(prompt_path, txt)
+        os.chmod(txt, 0o644)
+        out = os.path.join(work, name + ".bin")
+        # the gguf is untrusted input to libllama: parse it as nobody
+        cmd = ["setpriv", "--reuid=65534", "--regid=65534", "--clear-groups",
+               DUMPER, os.path.join(work, "model.gguf"), txt, out]
+        p = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=work)
+>       assert p.returncode == 0, f"kestrel-logits failed ({p.returncode}): {p.stderr[-2000:]}"
+E       AssertionError: kestrel-logits failed (4): ....................................
+E         prompt has 2074 tokens, need 1..2048
+E         
+E       assert 4 == 0
+E        +  where 4 = CompletedProcess(args=['setpriv', '--reuid=65534', '--regid=65534', '--clear-groups', '/usr/local/bin/kestrel-logits', '/tmp/kestrel-grade-eq3irgka/model.gguf', '/tmp/kestrel-grade-eq3irgka/crime_max.txt', '/tmp/kestrel-grade-eq3irgka/crime_max.txt.bin'], returncode=4, stdout='', stderr='....................................\nprompt has 2074 tokens, need 1..2048\n').returncode
+
+test_port.py:63: AssertionError
+_____________________________ test_prompt[dracula] _____________________________
+
+prompt = '/tests/prompts/dracula.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 1923 tokens, tokenizer.json gives 1900; first difference at 158
+E       assert [1, 359, 539,...62, 1174, ...] == [1, 359, 539,...62, 1174, ...]
+E         
+E         At index 158 diff: 350 != 401
+E         Left contains 23 more items, first extra item: 1291
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (1984 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+____________________________ test_prompt[markdown] _____________________________
+
+prompt = '/tests/prompts/markdown.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 1105 tokens, tokenizer.json gives 1100; first difference at 25
+E       assert [1, 5, 295, 4...2669, 16, ...] == [1, 5, 295, 4...2669, 16, ...]
+E         
+E         At index 25 diff: 16 != 2949
+E         Left contains 5 more items, first extra item: 20
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (1125 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+___________________________ test_prompt[python_src] ____________________________
+
+prompt = '/tests/prompts/python_src.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 1499 tokens, tokenizer.json gives 1498; first difference at 221
+E       assert [1, 913, 770,... 37, 278, ...] == [1, 913, 770,... 37, 278, ...]
+E         
+E         At index 221 diff: 15 != 1266
+E         Left contains one more item: 1073
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (1506 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+_____________________________ test_prompt[ulysses] _____________________________
+
+prompt = '/tests/prompts/ulysses.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 1504 tokens, tokenizer.json gives 1500; first difference at 323
+E       assert [1, 86, 330, ...413, 201, ...] == [1, 86, 330, ...413, 201, ...]
+E         
+E         At index 323 diff: 350 != 401
+E         Left contains 4 more items, first extra item: 1670
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (1516 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+____________________________ test_prompt[wallpaper] ____________________________
+
+prompt = '/tests/prompts/wallpaper.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 405 tokens, tokenizer.json gives 400; first difference at 12
+E       assert [1, 300, 811,...04, 1377, ...] == [1, 300, 811,...04, 1377, ...]
+E         
+E         At index 12 diff: 350 != 755
+E         Left contains 5 more items, first extra item: 599
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (420 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+___________________________ test_prompt[whitespace] ____________________________
+
+prompt = '/tests/prompts/whitespace.txt', work = '/tmp/kestrel-grade-eq3irgka'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+>       assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+E       AssertionError: token ids differ: llama.cpp gave 649 tokens, tokenizer.json gives 668; first difference at 14
+E       assert [1, 980, 1162...321, 326, ...] == [1, 980, 1162...321, 326, ...]
+E         
+E         At index 14 diff: 204 != 259
+E         Right contains 19 more items, first extra item: 67
+E         
+E         Full diff:
+E           [
+E               1,...
+E         
+E         ...Full output truncated (859 lines hidden), use '-vv' to show
+
+test_port.py:90: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_port.py::test_sealed_prompts_present
+PASSED test_port.py::test_gguf_tensors_are_f32
+PASSED test_port.py::test_prompt[access_log]
+PASSED test_port.py::test_prompt[csv_table]
+PASSED test_port.py::test_prompt[digit_run]
+PASSED test_port.py::test_prompt[emoji_only]
+PASSED test_port.py::test_prompt[empty]
+PASSED test_port.py::test_prompt[hello]
+PASSED test_port.py::test_prompt[json_blob]
+PASSED test_port.py::test_prompt[mixed_scripts]
+PASSED test_port.py::test_prompt[one_digit]
+PASSED test_port.py::test_prompt[quijote]
+PASSED test_port.py::test_prompt[sanguo]
+PASSED test_port.py::test_prompt[shouting]
+PASSED test_port.py::test_prompt[trial]
+FAILED test_port.py::test_prompt[cpp_src] - AssertionError: token ids differ:...
+FAILED test_port.py::test_prompt[crime_max] - AssertionError: kestrel-logits ...
+FAILED test_port.py::test_prompt[dracula] - AssertionError: token ids differ:...
+FAILED test_port.py::test_prompt[markdown] - AssertionError: token ids differ...
+FAILED test_port.py::test_prompt[python_src] - AssertionError: token ids diff...
+FAILED test_port.py::test_prompt[ulysses] - AssertionError: token ids differ:...
+FAILED test_port.py::test_prompt[wallpaper] - AssertionError: token ids diffe...
+FAILED test_port.py::test_prompt[whitespace] - AssertionError: token ids diff...
+======================== 8 failed, 15 passed in 39.80s =========================

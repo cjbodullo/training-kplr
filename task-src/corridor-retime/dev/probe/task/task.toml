@@ -1,0 +1,44 @@
+artifacts = ["/app/am_peak.add.xml"]
+
+[task]
+name = "afterquery/corridor-retime"
+
+[metadata]
+author_name = "Shaswat Panda"
+author_email = "pandashaswat712@gmail.com"
+difficulty_explanation = """
+This is the fixed time AM peak retime a UK traffic signals engineer does for a linked corridor: four signal junctions on a main road (J1 to J4, a 60 m link between J3 and J4), stage greens and offsets for one common cycle, under a fixed controller specification. The plan is judged in Eclipse SUMO 1.18 on held back term time mornings, so the agent can run the same simulator, but it never sees the demand it is graded on. Demand has to be inferred from four weeks of UTC loop data collected under the old plan, and that data is not today's demand.
+The hard part is a level shift hidden behind a capacity cap. Phase 2 of the Orchard Way estate (behind J2) was occupied from 2 November, the last week of the history, and the graded mornings are after it. In the first weeks the estate's offside (right turn) lane runs under capacity at about 344 veh/h at the peak. In the last week its demand is about 590 veh/h, but the old plan's 30 s estate stage caps the stop line at about 454 veh/h, flat from 07:30 to 10:00, with the queue standing over the upstream loop. The extra traffic is visible only as the queue lasting longer: everything counted from 07:00 to 12:00 arrived in that window, so conservation over the last week alone (spread in the commuter shape of approaches that never queue) recovers about 600 veh/h. Three confident readings are wrong: averaging all term days dilutes the one post occupation week and never sees a queue on average; taking the last week's stop line counts reads the cap; and the developer's transport assessment (TRICS trip rates, +67 veh/h on the right turn, "88.6% degree of saturation, no mitigation required") is far too low. The estate's turning lanes also discharge at about 1666 veh/h of green, measurable from that capped discharge under the old green, not the 1950 of the main road lanes. Once J2 is retimed the estate traffic the old plan held back (about 150 veh/h) is released east into J3 and J4.
+The data also carries ordinary detector faults: the J2 westbound nearside loop counts every vehicle twice (visible only by conservation against what J3 sends west), two J3 feeders are crossed in the cabinet (School Lane and westbound nearside), a Kiln Road stop line loop is stuck from 21 October, half term week (26 to 30 October) sits in the history and the only turning count at J3 was taken in half term. Green is zero sum at J2 and J3 (each with a pedestrian stage) and the 60 m J3 to J4 link stores about eight cars per lane, so J3 and J4 have to run in step.
+Measured through the actual verifier on the ten sealed mornings, each variant being the reference with one thing changed (sealed mornings failed in brackets): demand from the pre occupation weeks fails all 10; the mean of all term days fails all 10; the transport assessment uplift fails all 10; the last week's stop line counts without conservation fail 7 (days 1, 3, 4, 5, 7, 8, 10); keeping the double counting loop fails 9 (all but day 2); the default 1950 veh/h saturation flow for the estate fails 1 (day 4); J4's offset 37 s away from J3's fails all 10. The trivial null, the existing plan copied through as am_peak, fails all 10. Some choices do not discriminate and are not graded traps: keeping the crossed J3 feeders, leaving out the released traffic at J3 and J4, and setting every offset to zero all pass every sealed morning. The reference passes all ten sealed mornings. An experienced signals engineer with the model to hand needs most of a day.
+
+Data provenance: the corridor, its roads, the estate and the council are synthetic, and the transport assessment extract was written for the task in the usual UK format. The network was written as SUMO plain XML and built with netconvert --lefthand; the loop data, the turning count and the sealed mornings were produced by running SUMO 1.18 itself with the old plan (history) or the agent's plan (grading) over vehicles sampled from a known origin destination demand with commuter and school time profiles, day to day variation, a half term reduction and a 1.75x step in estate traffic from 2 November. The detector faults were applied to the exported counts afterwards.
+"""
+solution_explanation = """
+Read the loop export per channel and the old plan from existing.add.xml (110 s cycle). Drop days where a channel reads 0 vehicles at 100% occupancy (Kiln Road stop line from 21 October; its upstream loop stands in). Find half term from the school road upstream loop and exclude it. At J3 the listed School Lane stop line carries more than the old 19 s school stage can discharge while the listed westbound nearside lane carries the school road's shape: swap them back. At J2 the westbound stop lines add up to far more than J3 sends west; the nearside loop's count per occupancy is double its neighbour's: halve it. Find the step change: the estate's daily morning totals in the last week are about 1.8x the earlier term weeks, so today's demand comes from those five days only. The estate offside lane's upstream loop sat under a standing queue that week, so its demand is the week's total count spread in the commuter shape (about 602 veh/h against 454 counted), and its saturation flow is the capped discharge divided by the old green share (about 1666 veh/h). The difference between demand and counted discharge (about 148 veh/h) is added to the eastbound lanes at J3 and J4. Peak half hour lane flows over 1950 veh/h (main road), 1750 (side roads) or the measured estate figure give the critical ratios. Use the 120 s maximum cycle, share each junction's usable green in proportion (pedestrian stages 9 s), set J4's main road green to J3's plus 3 s, offsets J1 0, J2 112, J3 0, J4 0, and write am_peak by copying each existing program's phases and replacing only the stage greens. solution/retime.py does all of this from /app/utc and /app/model/existing.add.xml.
+"""
+verification_explanation = """
+The verifier reads /app/am_peak.add.xml as data and never hands it to SUMO. It checks the controller rules: exactly one tlLogic programID am_peak, type static, for each of J1 to J4; every phase state equal, in order, to the sealed copy of the existing program; every interstage phase (amber, all red, red amber) at its fixed duration; stage greens in whole seconds at or above the minimum greens, pedestrian stages exactly 9 s; one common cycle of at most 120 s; offsets in 0 to cycle - 1. It then writes a clean tlLogic file from those durations and offsets and runs real SUMO 1.18 (the same Ubuntu package as the agent's image) with the sealed network and blocking back lane area detectors over ten sealed term time mornings with phase 2 occupied, 06:45 to 11:00 (vehicle files sampled from the true demand with seeds not used anywhere in the history). Each morning must have zero teleports, every loaded vehicle arrived, no departure delay over 300 s, and no link between junctions with a jam reaching within 8 m of its upstream stop line for more than 120 s. All ten mornings must pass for reward 1. SUMO is deterministic for a fixed seed, so the grade is reproducible.
+Calibration: the reference plan passes all ten sealed mornings (worst departure delay 85 s, worst blocking back 44 s) and 20 of 20 further random phase 2 term mornings (worst departure delay 209 s, worst blocking back 51 s). Per morning discrimination is documented in the difficulty explanation: the trivial null fails every sealed morning, each graded mistake fails between 1 and 10, and the non discriminating choices pass every morning and are listed as such. Because every morning must pass, a plan is rejected by its worst morning.
+"""
+category = "Operations"
+subcategory = "Logistics"
+tags = ["traffic-signals", "sumo", "loop-detectors", "utc", "signal-timing", "demand-estimation", "simulation"]
+expert_time_estimate_hours = 7
+relevant_experience = """
+I have worked as a traffic signals engineer for a UK local highway authority, producing fixed time UTC plans for linked urban junctions from loop detector data and turning counts, checking them in microsimulation, and dealing with faulty and crossed detector feeds on older controller cabinets.
+"""
+
+[verifier]
+timeout_sec = 1200.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 14400.0
+
+[environment]
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 10240
+gpus = 0

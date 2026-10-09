@@ -1,0 +1,207 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 12 items
+
+test_plan.py::test_controller_rules PASSED
+test_plan.py::test_sealed_days_found PASSED
+test_plan.py::test_day[day1] day1 {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, 'block_back': {'a_43_1': 13}}
+day10 {'teleports': 0, 'loaded': 9247, 'arrived': 9247, 'depart_delay': 500.7, 'block_back': {'a_43_0': 12, 'a_43_1': 6}}
+day2 {'teleports': 0, 'loaded': 8921, 'arrived': 8921, 'depart_delay': 170.1, 'block_back': {}}
+day3 {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, 'block_back': {'a_43_1': 35, 'a_43_0': 4}}
+day4 {'teleports': 0, 'loaded': 9356, 'arrived': 9356, 'depart_delay': 1295.4, 'block_back': {'a_43_1': 13, 'a_43_0': 11}}
+day5 {'teleports': 0, 'loaded': 9316, 'arrived': 9316, 'depart_delay': 847.4, 'block_back': {'a_43_1': 31, 'a_43_0': 21}}
+day6 {'teleports': 0, 'loaded': 9506, 'arrived': 9506, 'depart_delay': 372.3, 'block_back': {'a_43_1': 2, 'a_43_0': 5}}
+day7 {'teleports': 0, 'loaded': 9202, 'arrived': 9202, 'depart_delay': 949.2, 'block_back': {'a_43_1': 8, 'a_43_0': 7}}
+day8 {'teleports': 0, 'loaded': 9352, 'arrived': 9352, 'depart_delay': 876.2, 'block_back': {'a_43_1': 43, 'a_43_0': 14}}
+day9 {'teleports': 0, 'loaded': 9213, 'arrived': 9213, 'depart_delay': 305.9, 'block_back': {'a_43_0': 13}}
+FAILED
+test_plan.py::test_day[day10] FAILED
+test_plan.py::test_day[day2] PASSED
+test_plan.py::test_day[day3] FAILED
+test_plan.py::test_day[day4] FAILED
+test_plan.py::test_day[day5] FAILED
+test_plan.py::test_day[day6] FAILED
+test_plan.py::test_day[day7] FAILED
+test_plan.py::test_day[day8] FAILED
+test_plan.py::test_day[day9] FAILED
+
+=================================== FAILURES ===================================
+________________________________ test_day[day1] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day1'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 457 s to enter
+E       assert 456.8 <= 300.0
+
+test_plan.py:161: AssertionError
+_______________________________ test_day[day10] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day10'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 501 s to enter
+E       assert 500.7 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day3] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day3'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 652 s to enter
+E       assert 652.2 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day4] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day4'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 1295 s to enter
+E       assert 1295.4 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day5] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day5'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 847 s to enter
+E       assert 847.4 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day6] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day6'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 372 s to enter
+E       assert 372.3 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day7] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day7'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 949 s to enter
+E       assert 949.2 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day8] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day8'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 876 s to enter
+E       assert 876.2 <= 300.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day9] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 456.8, ...}, 'day10': {'teleports': 0, 'loa...depart_delay': 170.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 652.2, ...}, ...}
+day = 'day9'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 306 s to enter
+E       assert 305.9 <= 300.0
+
+test_plan.py:161: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_plan.py::test_controller_rules
+PASSED test_plan.py::test_sealed_days_found
+PASSED test_plan.py::test_day[day2]
+FAILED test_plan.py::test_day[day1] - AssertionError: queue past the edge of the model: a vehicle waited 457 s to enter
+assert 456.8 <= 300.0
+FAILED test_plan.py::test_day[day10] - AssertionError: queue past the edge of the model: a vehicle waited 501 s to enter
+assert 500.7 <= 300.0
+FAILED test_plan.py::test_day[day3] - AssertionError: queue past the edge of the model: a vehicle waited 652 s to enter
+assert 652.2 <= 300.0
+FAILED test_plan.py::test_day[day4] - AssertionError: queue past the edge of the model: a vehicle waited 1295 s to enter
+assert 1295.4 <= 300.0
+FAILED test_plan.py::test_day[day5] - AssertionError: queue past the edge of the model: a vehicle waited 847 s to enter
+assert 847.4 <= 300.0
+FAILED test_plan.py::test_day[day6] - AssertionError: queue past the edge of the model: a vehicle waited 372 s to enter
+assert 372.3 <= 300.0
+FAILED test_plan.py::test_day[day7] - AssertionError: queue past the edge of the model: a vehicle waited 949 s to enter
+assert 949.2 <= 300.0
+FAILED test_plan.py::test_day[day8] - AssertionError: queue past the edge of the model: a vehicle waited 876 s to enter
+assert 876.2 <= 300.0
+FAILED test_plan.py::test_day[day9] - AssertionError: queue past the edge of the model: a vehicle waited 306 s to enter
+assert 305.9 <= 300.0
+==================== 9 failed, 3 passed in 77.26s (0:01:17) ====================

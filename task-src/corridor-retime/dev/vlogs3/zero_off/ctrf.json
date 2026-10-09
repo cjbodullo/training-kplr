@@ -1,0 +1,167 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-10-08T18:25:42.024108+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 12,
+            "passed": 12,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1791483864267,
+            "stop": 1791483942023
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_plan.py::test_controller_rules",
+                "status": "passed",
+                "duration": 10,
+                "start": 1791483864292,
+                "stop": 1791483864302,
+                "retries": 0,
+                "file_path": "test_plan.py"
+            },
+            {
+                "name": "test_plan.py::test_sealed_days_found",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791483864303,
+                "stop": 1791483864303,
+                "retries": 0,
+                "file_path": "test_plan.py"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 77715,
+                "start": 1791483864303,
+                "stop": 1791483942018,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791483942018,
+                "stop": 1791483942019,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791483942019,
+                "stop": 1791483942020,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791483942020,
+                "stop": 1791483942020,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791483942020,
+                "stop": 1791483942021,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791483942021,
+                "stop": 1791483942021,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791483942021,
+                "stop": 1791483942022,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791483942022,
+                "stop": 1791483942022,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791483942022,
+                "stop": 1791483942023,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791483942023,
+                "stop": 1791483942023,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ]
+            }
+        ]
+    }
+}

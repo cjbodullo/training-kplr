@@ -1,0 +1,8 @@
+create_clock -name clk -period 5.5 [get_ports clk]
+set_clock_uncertainty 0.10 [get_clocks clk]
+set_input_delay 0.5 -clock clk [delete_from_list [all_inputs] [get_ports {clk rst_n scan_en}]]
+set_output_delay 0.5 -clock clk [all_outputs]
+set_driving_cell -lib_cell sky130_fd_sc_hd__buf_2 [delete_from_list [all_inputs] [get_ports clk]]
+set_load 0.01 [all_outputs]
+set_false_path -from [get_ports rst_n]
+set_case_analysis 0 [get_ports scan_en]

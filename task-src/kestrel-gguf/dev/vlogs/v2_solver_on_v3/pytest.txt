@@ -1,0 +1,687 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 23 items
+
+test_port.py::test_sealed_prompts_present PASSED                         [  4%]
+test_port.py::test_gguf_tensors_are_f32 PASSED                           [  8%]
+test_port.py::test_prompt[access_log] FAILED                             [ 13%]
+test_port.py::test_prompt[cpp_src] FAILED                                [ 17%]
+test_port.py::test_prompt[crime_max] FAILED                              [ 21%]
+test_port.py::test_prompt[csv_table] FAILED                              [ 26%]
+test_port.py::test_prompt[digit_run] FAILED                              [ 30%]
+test_port.py::test_prompt[dracula] FAILED                                [ 34%]
+test_port.py::test_prompt[emoji_only] PASSED                             [ 39%]
+test_port.py::test_prompt[empty] PASSED                                  [ 43%]
+test_port.py::test_prompt[hello] PASSED                                  [ 47%]
+test_port.py::test_prompt[json_blob] FAILED                              [ 52%]
+test_port.py::test_prompt[markdown] FAILED                               [ 56%]
+test_port.py::test_prompt[mixed_scripts] FAILED                          [ 60%]
+test_port.py::test_prompt[one_digit] PASSED                              [ 65%]
+test_port.py::test_prompt[python_src] FAILED                             [ 69%]
+test_port.py::test_prompt[quijote] FAILED                                [ 73%]
+test_port.py::test_prompt[sanguo] FAILED                                 [ 78%]
+test_port.py::test_prompt[shouting] FAILED                               [ 82%]
+test_port.py::test_prompt[trial] FAILED                                  [ 86%]
+test_port.py::test_prompt[ulysses] FAILED                                [ 91%]
+test_port.py::test_prompt[wallpaper] FAILED                              [ 95%]
+test_port.py::test_prompt[whitespace] FAILED                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_prompt[access_log] ____________________________
+
+prompt = '/tests/prompts/access_log.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.09112 at position 1156 of 1200
+E       assert np.float64(0.09111913546105477) <= 0.005
+E        +  where np.float64(0.09111913546105477) = <built-in method max of numpy.ndarray object at 0x787d442bd590>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d442bd590> = array([1.73811252e-06, 1.35354444e-05, 2.03508276e-05, ...,\n       1.22926621e-02, 7.78355689e-03, 1.35200896e-02], shape=(1200,)).max
+
+test_port.py:99: AssertionError
+_____________________________ test_prompt[cpp_src] _____________________________
+
+prompt = '/tests/prompts/cpp_src.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.1466 at position 696 of 1000
+E       assert np.float64(0.14661971762900006) <= 0.005
+E        +  where np.float64(0.14661971762900006) = <built-in method max of numpy.ndarray object at 0x787d442bde30>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d442bde30> = array([1.73811252e-06, 9.20698791e-06, 5.21820254e-05, 4.34558223e-05,\n       8.99235160e-05, 6.06444799e-05, 1.19418326e-04, 1.78834246e-04,\n       1.75269432e-04, 2.11103950e-04, 1.14725856e-04, 9.57463673e-05,\n       9.81500008e-05, 2.02198112e-04, 2.37471564e-04, 2.56213781e-04,\n       2.18477034e-04, 3.51656558e-04, 2.01308596e-04, 2.31367840e-04,\n       1.54308053e-04, 2.50867422e-04, 1.40412069e-04, 2.37507282e-04,\n       1.77844555e-04, 2.15325160e-04, 3.38298135e-04, 4.51907547e-04,\n       6.68283201e-04, 5.77745434e-04, 3.52769931e-04, 4.13610037e-04,\n       7.22587466e-04, 4.57338079e-04, 2.80536998e-04, 4.98716356e-04,\n       4.27058513e-04, 1.58207572e-04, 5.14909248e-05, 5.32657151e-04,\n       2.66313777e-04, 4.95749940e-04, 2.81253423e-04, 1.10469917e-04,\n       9.63308630e-05, 1.48841330e-04, 2.56043541e-04, 4.25476234e-04,\n       4.23054760e-04, 4.32093591e-04, 6.26702886e-04, 6.09150331e-04,\n       5.24895621e-04, 2.23280492e-04, 6.42623662e-04, 3.82307823e-04,\n       7.71812548e-04, 2.14403231e-04, 1.52883083e-04, 1.38658745e-04,\n       2.35261025e-04, 3.58301877e-04, 4.33883235e-04, 1.05636672e-04,\n       2.69646590e-04, 2.92838279e-04, 1.69882393e-04, 3.11769....19824400e-03, 6.39189699e-03, 2.77686641e-02, 8.21032830e-02,\n       5.90250947e-03, 7.73115313e-02, 2.29866136e-02, 1.47788696e-02,\n       2.06896400e-02, 1.07416879e-02, 3.13218419e-02, 4.08429631e-03,\n       4.64865895e-03, 5.37246277e-03, 3.72362814e-03, 5.79553899e-03,\n       2.19795923e-02, 5.30567497e-03, 8.42350660e-03, 8.23922891e-03,\n       2.19027679e-02, 9.47119633e-03, 4.96132497e-03, 1.38141208e-02,\n       8.68984836e-03, 9.33416777e-03, 6.75398993e-03, 8.22482720e-03,\n       6.74942692e-03, 1.11646188e-02, 1.36018117e-02, 9.33567010e-03,\n       5.81262267e-03, 6.40555732e-02, 1.62914027e-02, 5.88753202e-03,\n       2.18195261e-03, 8.90476895e-03, 9.17077593e-03, 5.06524445e-03,\n       5.02190886e-03, 2.07158507e-02, 2.52522826e-03, 2.53789084e-02,\n       2.02647662e-03, 9.16387291e-03, 3.94983276e-02, 7.29571306e-02,\n       5.68975299e-03, 1.45909950e-02, 1.00227000e-02, 4.81752705e-02,\n       5.52995489e-03, 1.13494373e-02, 2.24524516e-02, 1.13921242e-02,\n       1.54612241e-02, 1.66219918e-02, 3.77360560e-03, 5.04942101e-03,\n       8.04243092e-03, 9.28542611e-03, 1.56064679e-02, 9.71608060e-03,\n       2.47047498e-02, 4.57995516e-02, 9.40087168e-03, 5.07128940e-02]).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[crime_max] ____________________________
+
+prompt = '/tests/prompts/crime_max.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 1.619 at position 1831 of 2048
+E       assert np.float64(1.6189081422945861) <= 0.005
+E        +  where np.float64(1.6189081422945861) = <built-in method max of numpy.ndarray object at 0x787d443b4ed0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b4ed0> = array([1.73811252e-06, 3.82833812e-05, 7.14665976e-05, ...,\n       5.27099997e-01, 2.37485862e-02, 3.45296306e-02], shape=(2048,)).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[csv_table] ____________________________
+
+prompt = '/tests/prompts/csv_table.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.1112 at position 607 of 900
+E       assert np.float64(0.11118963138930305) <= 0.005
+E        +  where np.float64(0.11118963138930305) = <built-in method max of numpy.ndarray object at 0x787d443b5e30>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b5e30> = array([1.73811252e-06, 4.47332003e-06, 7.54842225e-05, 8.55836377e-05,\n       8.65769014e-05, 7.76137340e-05, 1.09418745e-04, 1.15223490e-04,\n       2.20062019e-04, 1.56063249e-04, 6.64360714e-05, 1.14782062e-04,\n       3.21439814e-04, 1.10790846e-04, 1.65406583e-04, 2.05468118e-04,\n       3.65250400e-04, 2.21228259e-04, 2.23300794e-04, 4.75157670e-04,\n       4.97275005e-04, 2.69962636e-04, 1.22577427e-03, 9.32530130e-04,\n       8.80478301e-05, 7.73539078e-05, 8.19410631e-05, 5.85041224e-05,\n       9.72531424e-05, 8.56010755e-05, 1.28455504e-04, 2.12968498e-04,\n       4.11507741e-04, 1.83018453e-04, 1.19236495e-04, 3.78862936e-04,\n       1.80690366e-04, 1.65237742e-04, 1.06213046e-04, 1.40569155e-04,\n       3.18867079e-04, 1.55863928e-04, 1.40366804e-04, 1.74433195e-04,\n       1.80257579e-04, 5.02264178e-04, 3.66605788e-04, 4.99747988e-04,\n       6.13424939e-04, 4.84120250e-04, 6.35747085e-04, 5.77837541e-04,\n       1.08673964e-03, 4.70452598e-04, 4.97630815e-04, 4.36386289e-04,\n       4.52949710e-04, 6.61715137e-04, 4.78611177e-04, 3.48060474e-04,\n       4.67293791e-04, 5.82954449e-04, 6.14553976e-04, 1.51947286e-04,\n       2.14628946e-04, 2.56366149e-04, 2.33433099e-04, 1.66879....38161633e-02, 4.66443543e-03, 3.11389887e-03, 3.86450856e-03,\n       3.86384859e-03, 3.08541781e-03, 1.56664543e-02, 4.61018560e-03,\n       5.97624356e-03, 6.49895290e-03, 6.14758704e-03, 7.55028848e-03,\n       8.19684812e-03, 3.10165701e-02, 6.82369291e-02, 8.24542809e-03,\n       8.73015378e-03, 2.26494369e-02, 1.49243747e-02, 1.12682524e-02,\n       2.68780487e-03, 2.79283115e-03, 6.35731783e-03, 6.79906907e-03,\n       8.70266882e-03, 4.14231547e-03, 7.74849597e-03, 1.94094224e-02,\n       7.27766339e-03, 8.08438848e-03, 7.05600024e-03, 3.98589030e-03,\n       5.46586807e-03, 4.52462900e-03, 8.19871111e-03, 5.74246552e-03,\n       8.75642691e-03, 6.31635918e-03, 8.27125136e-03, 2.01506370e-02,\n       1.02435602e-02, 7.01460181e-03, 4.03758347e-03, 7.33162896e-03,\n       6.04608220e-03, 7.34870518e-02, 4.77466570e-03, 4.87245861e-03,\n       5.05173865e-03, 6.80797746e-03, 7.38935659e-03, 8.78213759e-03,\n       4.43790372e-02, 7.52867557e-02, 4.43580347e-03, 7.23336730e-03,\n       2.06912758e-02, 3.84446746e-03, 4.32899042e-03, 5.25371247e-03,\n       3.74684983e-03, 6.08867809e-03, 4.64649444e-03, 5.04640105e-03,\n       3.65254969e-03, 3.33043048e-03, 1.98563897e-02, 7.88356793e-03]).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[digit_run] ____________________________
+
+prompt = '/tests/prompts/digit_run.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.02761 at position 1538 of 1600
+E       assert np.float64(0.027614547221824548) <= 0.005
+E        +  where np.float64(0.027614547221824548) = <built-in method max of numpy.ndarray object at 0x787d44c97d50>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d44c97d50> = array([1.73811252e-06, 2.62954662e-05, 2.34485460e-05, ...,\n       1.03062757e-03, 1.32181481e-03, 1.84252551e-03], shape=(1600,)).max
+
+test_port.py:99: AssertionError
+_____________________________ test_prompt[dracula] _____________________________
+
+prompt = '/tests/prompts/dracula.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 2.852 at position 1857 of 1900
+E       assert np.float64(2.8522625354944005) <= 0.005
+E        +  where np.float64(2.8522625354944005) = <built-in method max of numpy.ndarray object at 0x787d442be0d0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d442be0d0> = array([1.73811252e-06, 2.08593714e-05, 2.09568999e-05, ...,\n       1.39482181e-02, 1.75091569e-02, 1.07230701e-02], shape=(1900,)).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[json_blob] ____________________________
+
+prompt = '/tests/prompts/json_blob.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.3293 at position 579 of 700
+E       assert np.float64(0.3292615440396336) <= 0.005
+E        +  where np.float64(0.3292615440396336) = <built-in method max of numpy.ndarray object at 0x787d442be8b0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d442be8b0> = array([1.73811252e-06, 8.47793943e-06, 1.74620991e-04, 8.14128134e-05,\n       1.12811523e-04, 1.35546261e-04, 2.69471943e-04, 2.17891531e-04,\n       1.75364553e-04, 1.09754763e-04, 4.05046066e-04, 2.06434363e-04,\n       3.07344221e-04, 2.58375009e-04, 2.92081312e-04, 4.82592575e-04,\n       7.30441690e-04, 9.02385247e-04, 3.85731991e-04, 1.63758496e-04,\n       1.95828864e-04, 3.02839700e-04, 1.65884163e-04, 2.93126870e-04,\n       1.25930329e-04, 1.92498071e-04, 4.61762379e-05, 3.45877765e-04,\n       1.39107131e-04, 4.02946629e-04, 3.00635960e-04, 5.44045230e-04,\n       2.75392643e-04, 1.25567316e-04, 4.61455718e-05, 9.91387366e-05,\n       7.02150617e-04, 5.86168666e-04, 5.14505121e-04, 6.11086351e-04,\n       1.50450358e-04, 4.99160206e-04, 6.46569911e-04, 3.30540779e-04,\n       5.47584502e-04, 1.84160477e-04, 3.16812998e-04, 2.94132856e-04,\n       5.71270247e-04, 3.64853391e-04, 1.17261622e-03, 2.66658757e-04,\n       3.00678453e-04, 1.86218211e-04, 2.00418761e-04, 4.56195698e-04,\n       2.97134220e-04, 2.60436934e-04, 2.54624235e-04, 1.05435501e-04,\n       1.64243146e-04, 1.28789470e-04, 2.99063434e-04, 2.47964287e-04,\n       9.02924268e-05, 8.29187574e-05, 1.01031550e-04, 8.83687....04624345e-02, 1.15994725e-02, 2.17956924e-02, 1.26197139e-01,\n       1.10685013e-02, 3.44613918e-03, 6.33222895e-03, 3.04722923e-02,\n       3.47909042e-02, 1.50501853e-02, 6.49474238e-03, 8.48954963e-03,\n       1.08696743e-02, 6.52056235e-02, 3.88450638e-03, 1.27990560e-02,\n       5.48857787e-03, 2.19416536e-02, 3.82297498e-03, 3.10668402e-03,\n       3.37927871e-03, 3.86713651e-03, 4.66969927e-03, 4.77479728e-03,\n       2.46374519e-03, 5.84546870e-03, 6.48709767e-03, 1.10114393e-02,\n       4.01938662e-03, 2.15485983e-03, 9.56026875e-03, 4.28335272e-03,\n       1.54759138e-01, 1.24403339e-02, 8.49433029e-03, 1.45573305e-02,\n       4.43644266e-02, 8.62684274e-03, 2.87480657e-03, 1.07225391e-02,\n       5.40655017e-03, 1.60660084e-02, 1.24362684e-02, 1.05395767e-02,\n       5.00118289e-03, 2.06143202e-02, 3.62456461e-02, 1.64047809e-02,\n       2.07488777e-02, 1.33608039e-02, 6.16645449e-03, 4.18910810e-03,\n       1.77720185e-02, 1.16864703e-02, 4.20665253e-02, 1.04516177e-02,\n       1.71570878e-02, 3.85539052e-03, 2.16246086e-02, 3.34119439e-03,\n       2.73433854e-03, 2.23975603e-03, 4.50250595e-03, 3.58808050e-03,\n       3.18482874e-03, 3.69458663e-03, 3.89982821e-03, 4.81844602e-03]).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[markdown] _____________________________
+
+prompt = '/tests/prompts/markdown.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.245 at position 1076 of 1100
+E       assert np.float64(0.24501267221196432) <= 0.005
+E        +  where np.float64(0.24501267221196432) = <built-in method max of numpy.ndarray object at 0x787d44c6eb50>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d44c6eb50> = array([1.73811252e-06, 1.46736108e-05, 3.83798600e-05, ...,\n       1.99497259e-02, 1.26689076e-02, 2.33803195e-03], shape=(1100,)).max
+
+test_port.py:99: AssertionError
+__________________________ test_prompt[mixed_scripts] __________________________
+
+prompt = '/tests/prompts/mixed_scripts.txt'
+work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.2832 at position 1227 of 1324
+E       assert np.float64(0.2832105397810585) <= 0.005
+E        +  where np.float64(0.2832105397810585) = <built-in method max of numpy.ndarray object at 0x787d44c96430>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d44c96430> = array([1.73811252e-06, 1.75269919e-05, 4.27248561e-05, ...,\n       6.28909220e-02, 9.92768243e-03, 2.37289171e-02], shape=(1324,)).max
+
+test_port.py:99: AssertionError
+___________________________ test_prompt[python_src] ____________________________
+
+prompt = '/tests/prompts/python_src.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.3678 at position 785 of 1498
+E       assert np.float64(0.36778525705038234) <= 0.005
+E        +  where np.float64(0.36778525705038234) = <built-in method max of numpy.ndarray object at 0x787d443b64f0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b64f0> = array([1.73811252e-06, 1.86154110e-05, 4.53392431e-05, ...,\n       2.45476593e-02, 6.76143829e-02, 1.35950813e-02], shape=(1498,)).max
+
+test_port.py:99: AssertionError
+_____________________________ test_prompt[quijote] _____________________________
+
+prompt = '/tests/prompts/quijote.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.2646 at position 1189 of 1200
+E       assert np.float64(0.2646411035220262) <= 0.005
+E        +  where np.float64(0.2646411035220262) = <built-in method max of numpy.ndarray object at 0x787d443b65b0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b65b0> = array([1.73811252e-06, 1.29844330e-05, 4.39457908e-05, ...,\n       8.05779218e-03, 8.11062873e-02, 1.21650777e-02], shape=(1200,)).max
+
+test_port.py:99: AssertionError
+_____________________________ test_prompt[sanguo] ______________________________
+
+prompt = '/tests/prompts/sanguo.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.08595 at position 674 of 700
+E       assert np.float64(0.085950162088825) <= 0.005
+E        +  where np.float64(0.085950162088825) = <built-in method max of numpy.ndarray object at 0x787d443b4030>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b4030> = array([1.73811252e-06, 1.69432899e-05, 3.33414119e-05, 5.64009462e-05,\n       7.90394360e-05, 1.37593246e-04, 1.17956776e-04, 1.08083889e-04,\n       7.90897331e-05, 5.69951317e-05, 2.57382664e-05, 4.44669876e-05,\n       3.76460675e-05, 6.97879341e-05, 1.09915285e-04, 1.42129569e-04,\n       6.31714349e-05, 4.44189700e-05, 7.66677699e-04, 2.56400899e-04,\n       1.49104361e-04, 8.32089285e-05, 1.30880461e-04, 6.34097911e-04,\n       3.66160070e-04, 4.63697085e-04, 6.32092556e-04, 4.49075141e-04,\n       5.66658736e-04, 5.05455838e-04, 5.79403291e-04, 4.64763184e-04,\n       4.11042207e-04, 2.96572018e-04, 2.30647688e-04, 1.11160333e-04,\n       1.40009731e-04, 1.24233220e-04, 6.39871804e-04, 1.40779399e-04,\n       1.43690455e-04, 1.42583579e-04, 3.20856907e-04, 8.62545629e-04,\n       2.07198519e-04, 2.32584418e-04, 1.61177893e-04, 1.78431772e-04,\n       1.56456289e-04, 1.93932445e-04, 1.44538656e-04, 1.43199287e-04,\n       8.04631702e-04, 1.81910865e-04, 2.49686719e-04, 1.15833955e-03,\n       1.43110151e-04, 1.44963373e-04, 7.77230689e-05, 2.27408925e-04,\n       2.84568059e-03, 4.01655161e-04, 3.02212529e-04, 1.24248882e-04,\n       2.02282547e-04, 4.33930938e-04, 8.68327439e-04, 9.64147....75479874e-03, 3.16267469e-03, 1.77215855e-03, 2.16573356e-03,\n       1.38307065e-03, 1.13312048e-03, 9.52945396e-04, 1.54109026e-03,\n       1.02087029e-03, 1.76182911e-03, 8.86757268e-04, 1.25050355e-03,\n       1.51335856e-03, 9.05003475e-04, 2.46023499e-03, 1.31930067e-02,\n       4.73635093e-03, 4.63317819e-03, 7.58524918e-03, 1.24127976e-02,\n       1.61212574e-03, 6.40085412e-03, 1.76996602e-03, 2.32566241e-03,\n       1.65458707e-03, 7.56552866e-04, 1.52623659e-03, 9.92741030e-04,\n       1.32404904e-03, 1.09109378e-03, 1.02479589e-03, 5.38919457e-03,\n       1.22551309e-03, 1.86980648e-02, 3.32834372e-03, 1.47550727e-03,\n       4.64233330e-03, 2.71467571e-03, 8.89642554e-03, 1.26679725e-02,\n       8.15156858e-03, 7.90724213e-03, 8.59501621e-02, 7.68649252e-02,\n       4.26184311e-03, 2.35549565e-03, 1.62054685e-03, 1.33764681e-03,\n       1.23365059e-03, 1.95089994e-03, 2.67853098e-03, 2.38911782e-03,\n       3.85367073e-03, 5.38623195e-03, 2.37253945e-03, 3.75114754e-03,\n       3.12265861e-03, 2.32572556e-03, 6.19802016e-03, 1.23211290e-03,\n       7.91020232e-04, 6.58623234e-03, 2.18946474e-03, 4.42864287e-03,\n       2.23212434e-03, 1.95849024e-03, 2.70142359e-03, 3.76998047e-03]).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[shouting] _____________________________
+
+prompt = '/tests/prompts/shouting.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.07451 at position 754 of 769
+E       assert np.float64(0.07450892562493827) <= 0.005
+E        +  where np.float64(0.07450892562493827) = <built-in method max of numpy.ndarray object at 0x787d442bedf0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d442bedf0> = array([1.73811252e-06, 5.92743651e-05, 5.53694786e-05, 5.63890935e-05,\n       6.37423806e-05, 5.56866855e-05, 1.17344453e-04, 8.91917357e-05,\n       1.28222078e-04, 4.72653282e-05, 1.18572807e-04, 1.23248047e-04,\n       4.11498432e-04, 2.96227726e-04, 1.36747295e-04, 1.26924832e-04,\n       1.28509023e-04, 8.44184935e-05, 1.56879908e-04, 7.60579774e-05,\n       1.53292138e-04, 3.74570054e-05, 1.14756109e-04, 1.47511887e-04,\n       3.51640252e-04, 1.87153453e-04, 1.37694234e-04, 1.24518811e-04,\n       2.00956690e-04, 2.09168919e-04, 9.27047776e-05, 1.40504862e-04,\n       1.78939860e-04, 9.11049882e-05, 1.88900339e-04, 9.70408488e-05,\n       2.25986204e-04, 1.78103030e-04, 1.42012877e-04, 6.61993146e-05,\n       1.72072577e-04, 7.95058802e-05, 9.15176663e-05, 1.06792233e-04,\n       9.59332925e-05, 2.42473823e-04, 2.04536158e-04, 2.15615784e-04,\n       2.71724240e-04, 1.11965009e-04, 1.35082456e-04, 9.70178766e-05,\n       1.27791601e-04, 1.06367832e-04, 2.10467820e-04, 2.56292485e-04,\n       2.65901458e-04, 2.08073200e-04, 3.70342475e-04, 6.74914463e-04,\n       6.08832632e-04, 2.62097969e-04, 1.62356074e-04, 9.82011794e-05,\n       2.95890067e-04, 5.83257946e-04, 6.21902436e-04, 7.61422...32e-02, 1.89138379e-02, 5.81463532e-03,\n       6.81980781e-03, 4.54596092e-03, 2.64604948e-03, 2.27181640e-03,\n       1.04019740e-02, 2.91585595e-02, 5.88477779e-03, 1.71785000e-02,\n       4.67437731e-03, 9.91270484e-03, 4.17103349e-02, 1.47112977e-02,\n       9.62657190e-03, 1.82842731e-02, 1.53233641e-02, 3.09439764e-03,\n       2.51182224e-02, 1.58922152e-02, 4.80437432e-03, 6.41700297e-03,\n       1.09543139e-02, 1.62090677e-02, 8.29451660e-03, 3.71849462e-03,\n       1.60409129e-02, 1.54737414e-02, 3.78673753e-03, 9.67059617e-03,\n       1.21561117e-02, 1.91750215e-02, 2.80945103e-02, 1.13520738e-02,\n       2.94167081e-03, 6.32511969e-03, 6.67321074e-03, 5.99668151e-03,\n       6.37558617e-03, 2.96801432e-02, 8.31672086e-03, 9.64062396e-03,\n       9.90635712e-03, 2.72860722e-02, 1.08280281e-02, 1.48891584e-02,\n       2.38470993e-02, 1.27974513e-02, 3.78507518e-02, 2.84896934e-02,\n       9.23034750e-03, 2.96459932e-02, 7.45089256e-02, 1.18750400e-02,\n       1.92308344e-02, 5.12288345e-02, 2.61958866e-02, 2.31817690e-02,\n       9.50268729e-03, 7.48722537e-03, 4.83012741e-03, 4.48046975e-02,\n       3.74237516e-02, 3.85089510e-02, 4.32486215e-02, 2.29238666e-02,\n       9.04388188e-03]).max
+
+test_port.py:99: AssertionError
+______________________________ test_prompt[trial] ______________________________
+
+prompt = '/tests/prompts/trial.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.3471 at position 714 of 800
+E       assert np.float64(0.3471014807386812) <= 0.005
+E        +  where np.float64(0.3471014807386812) = <built-in method max of numpy.ndarray object at 0x787d443b65b0>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b65b0> = array([1.73811252e-06, 1.56784892e-05, 3.26796593e-05, 5.24750927e-05,\n       7.32165082e-05, 5.00753071e-05, 2.46174753e-05, 1.33389550e-04,\n       2.46817799e-04, 3.50914046e-04, 1.48309937e-04, 1.11614357e-04,\n       4.63391078e-04, 6.96455125e-05, 3.39001156e-04, 8.49573246e-04,\n       8.25080882e-04, 7.25605512e-04, 4.19880311e-04, 4.64086017e-04,\n       3.43267325e-04, 2.09130417e-04, 2.67353201e-04, 4.28865020e-04,\n       8.07232845e-04, 2.26098851e-03, 2.25519090e-03, 5.27447657e-03,\n       3.79061549e-03, 1.38889121e-03, 1.75026526e-04, 6.85958924e-04,\n       1.57483718e-03, 3.97365961e-03, 8.73604859e-04, 2.49912906e-03,\n       3.60876880e-04, 4.26107319e-04, 3.61261251e-04, 3.50597255e-04,\n       2.84123766e-04, 3.67667288e-04, 3.33384189e-04, 4.32398535e-04,\n       1.28019137e-04, 3.99377811e-04, 3.89370125e-04, 4.13869194e-04,\n       3.44852053e-04, 4.32684843e-04, 9.96498096e-04, 4.82914167e-04,\n       7.92611615e-04, 9.74641631e-04, 2.63172717e-03, 3.69114991e-03,\n       2.92363692e-03, 3.04240488e-03, 6.35313612e-04, 3.18001180e-03,\n       3.24395340e-03, 6.27283283e-04, 2.66972144e-04, 3.41349674e-04,\n       3.83232720e-04, 3.13200848e-04, 2.38753023e-04, 3.51090....42011480e-02, 8.38823397e-03, 1.46230443e-02, 2.21138111e-01,\n       8.31779936e-03, 8.20898415e-03, 1.58509568e-02, 7.74142274e-03,\n       1.10635155e-02, 1.58497395e-02, 1.18231813e-02, 7.21953288e-03,\n       1.11360487e-02, 8.46788697e-03, 1.38509049e-02, 1.73834042e-02,\n       2.88198372e-02, 2.28984176e-02, 2.56694134e-02, 4.47743128e-02,\n       7.41982894e-02, 4.64134996e-02, 1.02184000e-01, 1.80386494e-02,\n       6.02819447e-03, 1.10538948e-02, 5.75353075e-03, 2.26809051e-02,\n       9.03572197e-03, 8.17801331e-02, 2.78964723e-02, 9.00811277e-03,\n       1.97404878e-02, 6.05479074e-03, 1.21626410e-02, 1.84366508e-02,\n       1.46588303e-02, 9.32201641e-03, 3.31835686e-02, 7.38335149e-02,\n       5.88104566e-02, 9.63303509e-02, 2.29944560e-02, 2.12177570e-02,\n       2.76484251e-02, 1.29069219e-01, 1.09200651e-02, 1.12981462e-02,\n       1.47166812e-02, 1.48304917e-02, 2.80703574e-02, 2.02150516e-02,\n       1.50690965e-02, 2.60303230e-02, 1.33345709e-02, 1.16042866e-02,\n       1.12905099e-02, 1.41690840e-02, 5.76808659e-02, 3.72312048e-02,\n       4.43460317e-02, 5.72822138e-02, 8.27370172e-02, 1.27371929e-02,\n       1.86629860e-02, 1.46791844e-02, 2.45551109e-02, 1.31516102e-02]).max
+
+test_port.py:99: AssertionError
+_____________________________ test_prompt[ulysses] _____________________________
+
+prompt = '/tests/prompts/ulysses.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 1.004 at position 1302 of 1500
+E       assert np.float64(1.0042661932690686) <= 0.005
+E        +  where np.float64(1.0042661932690686) = <built-in method max of numpy.ndarray object at 0x787d44c6c330>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d44c6c330> = array([1.73811252e-06, 1.42064894e-05, 5.44275194e-05, ...,\n       2.41530925e-02, 1.28329476e-02, 4.56087864e-03], shape=(1500,)).max
+
+test_port.py:99: AssertionError
+____________________________ test_prompt[wallpaper] ____________________________
+
+prompt = '/tests/prompts/wallpaper.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.1711 at position 306 of 400
+E       assert np.float64(0.17112849228664118) <= 0.005
+E        +  where np.float64(0.17112849228664118) = <built-in method max of numpy.ndarray object at 0x787d443f9b90>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443f9b90> = array([1.73811252e-06, 3.84473647e-05, 3.06331792e-05, 9.13392155e-05,\n       3.51886865e-05, 4.84948430e-05, 1.36097094e-04, 5.81036745e-05,\n       7.81711197e-04, 2.55211007e-04, 3.56636918e-04, 2.60844075e-04,\n       3.14456978e-04, 2.48151991e-04, 3.88906475e-04, 3.33837584e-04,\n       2.46589866e-04, 4.83109160e-04, 1.08003729e-03, 4.80451987e-04,\n       1.51603009e-03, 1.11182267e-04, 4.20806872e-04, 1.79942130e-04,\n       1.39154271e-04, 8.33270323e-05, 6.37895648e-05, 1.03901952e-04,\n       7.87357768e-04, 3.51286187e-04, 1.70630535e-04, 1.44746743e-04,\n       1.08710946e-04, 1.39296913e-04, 2.11740340e-04, 1.24302614e-04,\n       2.52852533e-03, 6.25955868e-04, 3.50314667e-04, 3.55223108e-04,\n       1.04190933e-04, 1.04161686e-04, 2.94967905e-04, 6.02032350e-05,\n       2.34021589e-04, 3.94398308e-04, 6.06361873e-04, 6.51390403e-04,\n       6.64981404e-04, 4.95423547e-04, 4.73708203e-04, 5.48427874e-04,\n       1.25790154e-03, 1.75984517e-03, 3.24131384e-03, 3.26200472e-03,\n       3.61546567e-03, 5.50727112e-03, 5.26858380e-04, 3.22868674e-04,\n       5.90790584e-04, 3.29181710e-04, 6.88842944e-04, 8.98572667e-04,\n       6.13371714e-04, 5.17593068e-04, 3.92879093e-04, 5.00962....74877051e-03, 4.25083296e-03, 1.14161167e-02, 9.99745202e-03,\n       1.17494905e-02, 1.08610435e-02, 1.40564104e-02, 1.98318896e-02,\n       1.44616752e-02, 8.48464065e-03, 1.20183245e-02, 1.35522266e-02,\n       1.91904680e-02, 3.69189646e-02, 7.11327198e-03, 4.12082948e-02,\n       3.90234727e-02, 1.36692188e-01, 2.13553701e-02, 1.53103073e-02,\n       1.54869531e-01, 1.24630743e-02, 1.52212007e-02, 2.41917603e-03,\n       3.73548116e-02, 4.84998365e-03, 5.12232372e-03, 1.04077907e-02,\n       7.16525065e-02, 1.39096379e-02, 3.13422070e-03, 2.86346847e-03,\n       1.52794683e-02, 8.28499381e-03, 1.29186629e-02, 8.71431602e-03,\n       2.27552511e-02, 4.76743817e-03, 2.28151967e-02, 1.76837098e-02,\n       2.04091743e-02, 1.21164479e-02, 9.49241807e-03, 7.45289088e-03,\n       8.50002002e-03, 8.71851411e-03, 1.13585348e-02, 8.18964642e-03,\n       5.32342153e-03, 9.10065554e-03, 2.64410455e-03, 3.72823000e-03,\n       7.46120709e-03, 1.14530082e-02, 8.76224017e-03, 2.94864821e-02,\n       6.03253931e-03, 9.17693972e-03, 7.13316618e-03, 8.13264434e-03,\n       5.24180587e-03, 6.30645081e-03, 6.75927608e-03, 6.02250023e-03,\n       1.99437054e-02, 1.50855624e-02, 2.06437730e-02, 4.07338061e-03]).max
+
+test_port.py:99: AssertionError
+___________________________ test_prompt[whitespace] ____________________________
+
+prompt = '/tests/prompts/whitespace.txt', work = '/tmp/kestrel-grade-g9p7ianj'
+ref_model = Kestrel(
+  (embed): Embedding(4096, 256)
+  (blocks): ModuleList(
+    (0-5): 6 x Block(
+      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)
+      )
+    )
+  )
+  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+)
+hf_tok = Tokenizer(version="1.0", truncation=None, padding=None, added_tokens=[{"id":0, "content":"<|pad|>", "single_word":Fals..."a", "y"), ("âĢ", "Ļ"), ("a", "d"), ("i", "l"), ("Ġa", "s"), ("r", "i"), ("Ġw", "ith"), ("c", "t"), ("Ġ", "le"), ...]))
+
+    @pytest.mark.parametrize("prompt", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])
+    def test_prompt(prompt, work, ref_model, hf_tok):
+        text = open(prompt, encoding="utf-8", newline="").read()
+        want = hf_tok.encode(text).ids
+        ids, logits = run_dumper(work, prompt)
+        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))
+        assert ids.tolist() == want, (
+            f"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}")
+        assert logits.shape[1] == ref_model.cfg.vocab_size, f"n_vocab {logits.shape[1]}"
+        with torch.no_grad():
+            ref = torch.log_softmax(ref_model(torch.tensor([want]))[0], dim=-1).numpy()
+        got = torch.log_softmax(torch.from_numpy(logits.astype(np.float64)), dim=-1).numpy()
+        assert np.isfinite(got).all(), "non finite logits"
+        err = np.abs(got - ref).max(axis=1)
+        worst = int(err.argmax())
+>       assert err.max() <= TOL, f"log softmax off by {err.max():.4g} at position {worst} of {len(want)}"
+E       AssertionError: log softmax off by 0.1214 at position 588 of 668
+E       assert np.float64(0.12135791168268195) <= 0.005
+E        +  where np.float64(0.12135791168268195) = <built-in method max of numpy.ndarray object at 0x787d443b5110>()
+E        +    where <built-in method max of numpy.ndarray object at 0x787d443b5110> = array([1.73811252e-06, 1.90061526e-05, 2.26411257e-05, 1.10065263e-04,\n       2.98818240e-05, 6.13425267e-05, 4.01654035e-05, 3.65416972e-05,\n       1.08372247e-04, 9.72919973e-05, 7.02807999e-05, 3.46795847e-04,\n       1.29716963e-04, 1.37505431e-04, 1.43676571e-04, 6.96500295e-04,\n       8.58134883e-05, 2.05077859e-04, 1.02967261e-04, 4.41049648e-04,\n       1.70821738e-04, 3.73202365e-04, 1.30995047e-04, 9.06259045e-05,\n       5.07147201e-05, 4.34322201e-04, 2.12354385e-04, 8.37543682e-05,\n       1.07594391e-04, 2.78497441e-04, 2.34812208e-04, 4.30122006e-04,\n       2.40538679e-04, 3.08242416e-04, 1.59182881e-04, 7.16549272e-05,\n       2.26719946e-04, 1.05541105e-04, 2.89231591e-04, 1.51265520e-04,\n       2.94332038e-04, 2.97766179e-04, 6.86579578e-04, 7.34195484e-05,\n       1.38692812e-04, 1.78013684e-04, 4.09890143e-04, 2.40030678e-04,\n       1.60738112e-04, 7.73632622e-05, 3.87257026e-04, 3.95778591e-04,\n       3.03175249e-04, 2.44520913e-04, 1.98951085e-04, 1.33177428e-03,\n       1.69381094e-03, 4.50395371e-04, 3.35214699e-04, 2.39040843e-04,\n       6.12845141e-04, 2.46080535e-04, 3.25463020e-04, 2.70914335e-04,\n       7.83167388e-04, 6.74951964e-04, 9.80482971e-04, 2.81497....55789440e-02, 2.03586386e-02, 3.68881425e-03, 8.51040779e-03,\n       6.66711872e-03, 3.62079912e-02, 3.30422763e-03, 1.17847635e-03,\n       4.07551406e-03, 4.97723145e-03, 1.16487193e-02, 4.90473377e-03,\n       7.97168888e-03, 7.75689057e-03, 4.66241045e-03, 3.98689289e-03,\n       3.54490618e-03, 5.58901236e-03, 1.10850317e-02, 1.46998748e-02,\n       3.76578627e-02, 2.46570668e-03, 9.22463397e-03, 3.42610435e-03,\n       1.55408941e-02, 4.03153006e-03, 1.19880217e-03, 2.52031411e-03,\n       3.06384168e-03, 1.20307325e-02, 1.38204272e-02, 2.98510704e-02,\n       2.08760484e-03, 1.67094142e-03, 1.06345362e-02, 1.69252114e-02,\n       2.25504525e-03, 9.22449884e-03, 8.59624311e-03, 1.33187211e-02,\n       2.67320248e-03, 1.21099217e-02, 5.37848916e-03, 8.76972034e-03,\n       7.56798526e-03, 4.10547637e-03, 2.48509453e-03, 2.10078102e-03,\n       2.70599199e-03, 1.72613967e-02, 1.93382490e-03, 4.17228008e-03,\n       2.90794412e-03, 5.79264279e-02, 8.73124399e-03, 2.00525318e-02,\n       1.88173134e-02, 7.26702970e-03, 2.11765606e-02, 9.20207618e-03,\n       2.07183204e-03, 2.23715539e-03, 9.84869542e-02, 1.61838899e-02,\n       2.72874052e-03, 5.61549108e-03, 2.00940427e-03, 4.09062470e-03]).max
+
+test_port.py:99: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_port.py::test_sealed_prompts_present
+PASSED test_port.py::test_gguf_tensors_are_f32
+PASSED test_port.py::test_prompt[emoji_only]
+PASSED test_port.py::test_prompt[empty]
+PASSED test_port.py::test_prompt[hello]
+PASSED test_port.py::test_prompt[one_digit]
+FAILED test_port.py::test_prompt[access_log] - AssertionError: log softmax of...
+FAILED test_port.py::test_prompt[cpp_src] - AssertionError: log softmax off b...
+FAILED test_port.py::test_prompt[crime_max] - AssertionError: log softmax off...
+FAILED test_port.py::test_prompt[csv_table] - AssertionError: log softmax off...
+FAILED test_port.py::test_prompt[digit_run] - AssertionError: log softmax off...
+FAILED test_port.py::test_prompt[dracula] - AssertionError: log softmax off b...
+FAILED test_port.py::test_prompt[json_blob] - AssertionError: log softmax off...
+FAILED test_port.py::test_prompt[markdown] - AssertionError: log softmax off ...
+FAILED test_port.py::test_prompt[mixed_scripts] - AssertionError: log softmax...
+FAILED test_port.py::test_prompt[python_src] - AssertionError: log softmax of...
+FAILED test_port.py::test_prompt[quijote] - AssertionError: log softmax off b...
+FAILED test_port.py::test_prompt[sanguo] - AssertionError: log softmax off by...
+FAILED test_port.py::test_prompt[shouting] - AssertionError: log softmax off ...
+FAILED test_port.py::test_prompt[trial] - AssertionError: log softmax off by ...
+FAILED test_port.py::test_prompt[ulysses] - AssertionError: log softmax off b...
+FAILED test_port.py::test_prompt[wallpaper] - AssertionError: log softmax off...
+FAILED test_port.py::test_prompt[whitespace] - AssertionError: log softmax of...
+======================== 17 failed, 6 passed in 31.39s =========================

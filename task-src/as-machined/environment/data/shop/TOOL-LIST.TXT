@@ -1,0 +1,20 @@
+VMC-3 TOOL CRIB / PRESETTER  (Zoller, gauge line to tip)        checked 09-14-23
+pocket  description                                   dia     tip            length
+T1      face mill 5 insert                            50.000  flat           98.412
+T2      endmill 3fl carbide                           16.000  flat, sharp    110.250
+T3      endmill 3fl carbide                           10.000  flat, sharp    102.775
+T4      spot drill 90 deg                             12.000  90 incl point  95.300
+T5      jobber drill HSS                               6.800  118 incl point 124.640
+T6      carbide drill                                  6.600  140 incl point 121.115
+T7      endmill 3fl carbide                           12.000  flat, sharp    108.880
+T8      chamfer mill 90 incl, 2.0 flat at tip         12.000  see note       101.505
+T9      bull nose endmill                              8.000  corner R1.0    99.730
+T10     endmill 2fl, counterbore                      11.000  flat, sharp    96.210
+
+note T8: cone is 90 included. tip is flat 2.0 dia, cone opens to 12.0 dia.
+all other points are sharp. endmill corners are dead sharp unless a radius is listed.
+lengths are the presetter readings for the tool as it sits in its holder in that pocket.
+
+tool changes since last check
+09-22-26  T6: 6.8 HSS jobber drill (118 incl point, presetter 126.690) worn out, replaced by the
+          6.6 carbide drill above. H6 geometry re-entered from the presetter.

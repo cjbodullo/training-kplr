@@ -1,0 +1,45 @@
+# secrets / auth
+credentials.md
+kepler-tools/token.json
+kepler-tools/token.txt
+kepler-tools/cookies.txt
+.claude/settings.local.json
+
+# runtime logs / poll state
+*.log
+*.out
+kepler-tools/*_state.json
+kepler-tools/*_record.json
+kepler-tools/rt_poll.json
+kepler-tools/oc_poll.txt
+kepler-tools/oc_loop.txt
+
+# build outputs / heavy artifacts
+*.zip
+jobs/
+**/jobs*/
+**/_work/
+**/wheels/
+*.whl
+*.gguf
+*.pt
+*.safetensors
+*.bin
+*.tar
+*.tar.gz
+__pycache__/
+*.pyc
+node_modules/
+dev-gen/etcd-commit/**/etcd
+dev-gen/etcd-commit/**/etcdctl
+dev-gen/etcd-commit/**/etcdutl
+dev-gen/etcd-commit/**/tools/
+*.tar.xz
+task-src/*/dev/**/queue_log
+task-src/*/dev/*.lib
+# agent run transcripts (may embed auth)
+**/harbor-local/
+**/old_jobs/
+**/sessions/
+*.jsonl
+claude-code.txt

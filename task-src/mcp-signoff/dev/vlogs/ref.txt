@@ -1,0 +1,2 @@
+PASSED test_exceptions.py::test_block_meets_timing
+1

@@ -1,0 +1,243 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 12 items
+
+test_plan.py::test_controller_rules PASSED
+test_plan.py::test_sealed_days_found PASSED
+test_plan.py::test_day[day1] day1 {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, 'block_back': {'a_34_1': 235, 'a_34_0': 198, 'a_43_1': 79, 'a_43_0': 149}}
+day10 {'teleports': 0, 'loaded': 9238, 'arrived': 9238, 'depart_delay': 376.6, 'block_back': {'a_34_0': 208, 'a_34_1': 248, 'a_43_0': 92, 'a_43_1': 44}}
+day2 {'teleports': 0, 'loaded': 8576, 'arrived': 8576, 'depart_delay': 4.0, 'block_back': {'a_34_1': 231, 'a_34_0': 207, 'a_43_1': 30, 'a_43_0': 37}}
+day3 {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, 'block_back': {'a_34_0': 197, 'a_34_1': 190, 'a_43_0': 112, 'a_43_1': 85}}
+day4 {'teleports': 0, 'loaded': 9109, 'arrived': 9109, 'depart_delay': 70.1, 'block_back': {'a_34_0': 199, 'a_34_1': 240, 'a_43_1': 106, 'a_43_0': 141}}
+day5 {'teleports': 0, 'loaded': 9052, 'arrived': 9052, 'depart_delay': 123.0, 'block_back': {'a_34_1': 201, 'a_34_0': 151, 'a_43_1': 69, 'a_43_0': 93}}
+day6 {'teleports': 0, 'loaded': 9293, 'arrived': 9293, 'depart_delay': 164.3, 'block_back': {'a_34_0': 196, 'a_34_1': 241, 'a_43_0': 70, 'a_43_1': 86}}
+day7 {'teleports': 0, 'loaded': 8815, 'arrived': 8815, 'depart_delay': 42.6, 'block_back': {'a_34_0': 197, 'a_34_1': 209, 'a_43_1': 28, 'a_43_0': 45}}
+day8 {'teleports': 0, 'loaded': 8972, 'arrived': 8972, 'depart_delay': 3.6, 'block_back': {'a_34_1': 239, 'a_34_0': 204, 'a_43_1': 113, 'a_43_0': 89}}
+day9 {'teleports': 0, 'loaded': 9099, 'arrived': 9099, 'depart_delay': 4.2, 'block_back': {'a_34_1': 206, 'a_34_0': 178, 'a_43_0': 169, 'a_43_1': 88}}
+FAILED
+test_plan.py::test_day[day10] FAILED
+test_plan.py::test_day[day2] FAILED
+test_plan.py::test_day[day3] FAILED
+test_plan.py::test_day[day4] FAILED
+test_plan.py::test_day[day5] FAILED
+test_plan.py::test_day[day6] FAILED
+test_plan.py::test_day[day7] FAILED
+test_plan.py::test_day[day8] FAILED
+test_plan.py::test_day[day9] FAILED
+
+=================================== FAILURES ===================================
+________________________________ test_day[day1] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day1'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 235 s
+E       assert 235 <= 120
+
+test_plan.py:164: AssertionError
+_______________________________ test_day[day10] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day10'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 377 s to enter
+E       assert 376.6 <= 180.0
+
+test_plan.py:161: AssertionError
+________________________________ test_day[day2] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day2'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 231 s
+E       assert 231 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day3] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day3'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_0 for 197 s
+E       assert 197 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day4] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day4'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 240 s
+E       assert 240 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day5] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day5'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 201 s
+E       assert 201 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day6] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day6'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 241 s
+E       assert 241 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day7] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day7'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 209 s
+E       assert 209 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day8] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day8'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 239 s
+E       assert 239 <= 120
+
+test_plan.py:164: AssertionError
+________________________________ test_day[day9] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, ...}, 'day10': {'teleports': 0, 'loade...6, 'depart_delay': 4.0, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 2.6, ...}, ...}
+day = 'day9'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+        assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+        worst = max(m["block_back"].items(), key=lambda kv: kv[1], default=(None, 0))
+>       assert worst[1] <= MAX_BLOCK_BACK, f"blocking back on {worst[0]} for {worst[1]} s"
+E       AssertionError: blocking back on a_34_1 for 206 s
+E       assert 206 <= 120
+
+test_plan.py:164: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_plan.py::test_controller_rules
+PASSED test_plan.py::test_sealed_days_found
+FAILED test_plan.py::test_day[day1] - AssertionError: blocking back on a_34_1 for 235 s
+assert 235 <= 120
+FAILED test_plan.py::test_day[day10] - AssertionError: queue past the edge of the model: a vehicle waited 377 s to enter
+assert 376.6 <= 180.0
+FAILED test_plan.py::test_day[day2] - AssertionError: blocking back on a_34_1 for 231 s
+assert 231 <= 120
+FAILED test_plan.py::test_day[day3] - AssertionError: blocking back on a_34_0 for 197 s
+assert 197 <= 120
+FAILED test_plan.py::test_day[day4] - AssertionError: blocking back on a_34_1 for 240 s
+assert 240 <= 120
+FAILED test_plan.py::test_day[day5] - AssertionError: blocking back on a_34_1 for 201 s
+assert 201 <= 120
+FAILED test_plan.py::test_day[day6] - AssertionError: blocking back on a_34_1 for 241 s
+assert 241 <= 120
+FAILED test_plan.py::test_day[day7] - AssertionError: blocking back on a_34_1 for 209 s
+assert 209 <= 120
+FAILED test_plan.py::test_day[day8] - AssertionError: blocking back on a_34_1 for 239 s
+assert 239 <= 120
+FAILED test_plan.py::test_day[day9] - AssertionError: blocking back on a_34_1 for 206 s
+assert 206 <= 120
+======================== 10 failed, 2 passed in 22.90s =========================

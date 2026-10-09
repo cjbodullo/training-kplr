@@ -1,0 +1,299 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-10-08T17:35:49.139487+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 23,
+            "passed": 23,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1791480882834,
+            "stop": 1791480949139
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_port.py::test_sealed_prompts_present",
+                "status": "passed",
+                "duration": 2,
+                "start": 1791480892710,
+                "stop": 1791480892712,
+                "retries": 0,
+                "file_path": "test_port.py"
+            },
+            {
+                "name": "test_port.py::test_gguf_tensors_are_f32",
+                "status": "passed",
+                "duration": 236,
+                "start": 1791480892716,
+                "stop": 1791480892952,
+                "retries": 0,
+                "file_path": "test_port.py"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 6918,
+                "start": 1791480892952,
+                "stop": 1791480899870,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 4274,
+                "start": 1791480899871,
+                "stop": 1791480904145,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 9313,
+                "start": 1791480904145,
+                "stop": 1791480913458,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 3916,
+                "start": 1791480913458,
+                "stop": 1791480917374,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 4389,
+                "start": 1791480917375,
+                "stop": 1791480921764,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 6334,
+                "start": 1791480921764,
+                "stop": 1791480928098,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 214,
+                "start": 1791480928102,
+                "stop": 1791480928316,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 312,
+                "start": 1791480928317,
+                "stop": 1791480928629,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 320,
+                "start": 1791480928630,
+                "stop": 1791480928950,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 2271,
+                "start": 1791480928951,
+                "stop": 1791480931222,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 2426,
+                "start": 1791480931223,
+                "stop": 1791480933649,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 3773,
+                "start": 1791480933650,
+                "stop": 1791480937423,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 175,
+                "start": 1791480937423,
+                "stop": 1791480937598,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 4236,
+                "start": 1791480937598,
+                "stop": 1791480941834,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 2014,
+                "start": 1791480941835,
+                "stop": 1791480943849,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 655,
+                "start": 1791480943849,
+                "stop": 1791480944504,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 814,
+                "start": 1791480944504,
+                "stop": 1791480945318,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 806,
+                "start": 1791480945319,
+                "stop": 1791480946125,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 2248,
+                "start": 1791480946125,
+                "stop": 1791480948373,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 239,
+                "start": 1791480948373,
+                "stop": 1791480948612,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 518,
+                "start": 1791480948612,
+                "stop": 1791480949130,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            }
+        ]
+    }
+}

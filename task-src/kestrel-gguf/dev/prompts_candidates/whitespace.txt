@@ -1,0 +1,128 @@
+    return  y  
+
+    return  y  
+
+x = [1,  2,   3]	
+   
+    x = [1,  2,   3]
+
+  # note   	
+   
+# note   	
+	a	=	b	
+   
+     
+
+    # note     
+	a	=	b
+
+    x = [1,  2,   3] 
+	return  y	
+
+	   	
+    # note    
+   
+    # note   
+		# note     
+		x = [1,  2,   3]	
+	if x:
+		x = [1,  2,   3]	
+   
+a	=	b  
+		# note     
+   
+		# note   	
+
+	x = [1,  2,   3]	
+   
+		# note   	
+
+	   
+	a	=	b
+
+		if x:	
+
+       
+
+  x = [1,  2,   3]
+
+    return  y	
+   
+# note   
+   
+a	=	b 
+   
+	     
+		# note   	
+
+		# note    
+	return  y 
+
+# note     
+
+	    
+   
+		if x:
+    return  y
+
+  if x:	
+
+         
+
+	if x: 
+
+  return  y  
+
+    return  y	
+		if x:
+   
+		   	
+	x = [1,  2,   3]
+   
+  return  y 
+
+	if x:  
+  a	=	b 
+x = [1,  2,   3]
+		if x:
+if x:  
+
+	   
+if x:	
+    # note   
+if x:	
+   
+    # note     
+
+		     
+
+   
+
+	return  y
+
+	x = [1,  2,   3] 
+
+  x = [1,  2,   3] 
+
+	    
+a	=	b 
+	# note   	
+   
+    a	=	b 
+
+    a	=	b
+
+    return  y 
+	   
+   
+  if x:	
+  # note     
+		# note    
+	if x: 
+
+    x = [1,  2,   3]	
+
+a	=	b	
+    if x: 
+       
+       	

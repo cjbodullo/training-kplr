@@ -1,0 +1,4 @@
+read /tests/data_a.txt
+big
+nonce
+time

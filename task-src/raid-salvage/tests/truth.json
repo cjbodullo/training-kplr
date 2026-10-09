@@ -1,0 +1,601 @@
+{
+ "files": {
+  "/admin/.keep": {
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "size": 0
+  },
+  "/admin/policy-01.md": {
+   "sha256": "fd503074b7f98cc4d1585a3a5f5ac1e62ff69bb5d3cd1f04d660af076ec5151a",
+   "size": 18755
+  },
+  "/admin/policy-02.md": {
+   "sha256": "9cf93e6eaf330697a2e2b33e1d085b06238c054d056449527144922c248890b9",
+   "size": 21022
+  },
+  "/admin/policy-04.md": {
+   "sha256": "6e45569c388cf05f5e3851286fd27dedcc4f51462c8bb4cd3486a3ad57d70a47",
+   "size": 20287
+  },
+  "/admin/policy-05.md": {
+   "sha256": "3c93b25574b484b51898bcea0b9e19046ce370193f12a054206abb5cf48a1f75",
+   "size": 27237
+  },
+  "/admin/policy-06.md": {
+   "sha256": "2a2255092e16e5cebdfcb39547fa46e3156fc15364ecb3eaf5a26fa7499c3e99",
+   "size": 3460
+  },
+  "/archive/backup-2024.log.gz": {
+   "sha256": "78b12566434dced445f2bc3578eea906cbb89a4568f841d2e2d1f035a1dd6103",
+   "size": 233236
+  },
+  "/archive/rsync-2024.log.gz": {
+   "sha256": "58b766517ba489e6e83819d6c6c98a913d66124cdaa067aae9a7e2340f5500ad",
+   "size": 232399
+  },
+  "/archive/scans/scan-2024-03.txt": {
+   "sha256": "56ece4982a945693e659fe60c44994e6055f8d24d43c8151a0fc62252d2cb0f4",
+   "size": 750892
+  },
+  "/archive/scans/scan-2024-04.txt": {
+   "sha256": "50783bb088ce2a327a6e578a1d2724a8ce79cb278cee68af483ce969421efc85",
+   "size": 722497
+  },
+  "/archive/scans/scan-2024-07.txt": {
+   "sha256": "3a5db28896ee9972bc2de49c741e28ccc85c1ec1fb327543f69264faf0851018",
+   "size": 577255
+  },
+  "/archive/scans/scan-2024-09.txt": {
+   "sha256": "1befb82117947f9d58de0984153835d3d6294883fececd29c7fba1ebedee00ce",
+   "size": 815236
+  },
+  "/archive/scans/scan-2024-10.txt": {
+   "sha256": "d6f9fb9e39dac09bf0d87fbdd19215eb6ea2806bb574e9d0d96dc4d4f9a076d9",
+   "size": 697168
+  },
+  "/archive/scans/scan-2024-12.txt": {
+   "sha256": "0065765915763b953085443bd076945eb5323a2ccc52dc440c99c300685d66d8",
+   "size": 597680
+  },
+  "/archive/scans/scan-2026-01.txt": {
+   "sha256": "ab757881b0f7e34fcb722ed0dbc0a9d899870203c030803013d2318f609bf965",
+   "size": 856142
+  },
+  "/archive/scans/scan-2026-02.txt": {
+   "sha256": "c87e26d012a9c401218fa6d166f0ee08bdfbed4df3055dfea74e8ceeefb348aa",
+   "size": 305030
+  },
+  "/archive/scans/scan-2026-03.txt": {
+   "sha256": "1f8ac9f66a3e6b37c5fbb2dc233213248c57510ea5644a200bad128e48fd2fc6",
+   "size": 702815
+  },
+  "/archive/scans/scan-2026-04.txt": {
+   "sha256": "1be61e23747a11ad44b74e7a9f8bf9a40398a7e1da967cb6dd031a1d1e900008",
+   "size": 664577
+  },
+  "/archive/scans/scan-2026-05.txt": {
+   "sha256": "7766203a676c8d2c82dfa3c2c9b1f134a6587e6ba13ffea431ca813b85fe443a",
+   "size": 438436
+  },
+  "/archive/scans/scan-2026-06.txt": {
+   "sha256": "3043c61cd326fd9cdb6887f8657b9f80dab1e6fb81ad000e12c0d4b1e106022b",
+   "size": 739947
+  },
+  "/archive/scans/scan-2026-07.txt": {
+   "sha256": "3e97757d1882c5b10ee359836d8129c2520702608a1ccfe8dd1d0642cbff266b",
+   "size": 431642
+  },
+  "/archive/scans/scan-2026-08.txt": {
+   "sha256": "b4c2756f87b8dcb604d7e39369c4fc075bbc616a458b633431350c2e8f0c8c42",
+   "size": 758083
+  },
+  "/archive/scans/scan-2026-09.txt": {
+   "sha256": "3bd2c074d78eed210eaecaceca33337aa626fd2c868105d168bcff5bfa015b50",
+   "size": 303333
+  },
+  "/archive/scans/scan-2026-10.txt": {
+   "sha256": "d6a62bcf6c97f93ef170651283b116273e275f3b843165f038173673c78def44",
+   "size": 693694
+  },
+  "/archive/scans/scan-2026-11.txt": {
+   "sha256": "06b86d4acc3ae460b538612caa848a54495507129f708e1fd7e6da99be2dbb74",
+   "size": 34078
+  },
+  "/archive/scans/scan-2026-12.txt": {
+   "sha256": "9147d018fa49440153604da690d99eae16079ce006bc12aea16adb23002a1ac2",
+   "size": 53364
+  },
+  "/archive/scans/scan-2026-13.txt": {
+   "sha256": "0eec79387a1a9134b522866efe7132f35ada69ec70c8cf5c8f6041ae2c656e06",
+   "size": 53325
+  },
+  "/archive/scans/scan-2026-14.txt": {
+   "sha256": "3180c39ffbb38775372210c95642bbeef9a96f16af26eafc3bcf0f3743948f56",
+   "size": 59670
+  },
+  "/archive/scans/scan-2026-15.txt": {
+   "sha256": "8cab2ff2edeea3524a66e972380943cb926ebfee11e329ff89ac1fb086839516",
+   "size": 58897
+  },
+  "/archive/scans/scan-2026-16.txt": {
+   "sha256": "db4a3a2b198380f08fd7bd94879405e16d926ec4cca57e26d50f4fc4b03ec3cf",
+   "size": 31985
+  },
+  "/archive/scans/scan-2026-17.txt": {
+   "sha256": "29dae27d6dc7aac34727b695345ab6c9113212b747cfb4135f09ee4828df477b",
+   "size": 32970
+  },
+  "/archive/scans/scan-2026-18.txt": {
+   "sha256": "b88535da855a330c3835bd724a0d9caccb4afba3c187d44497169912dd906dea",
+   "size": 23249
+  },
+  "/archive/smbd-2024.log.gz": {
+   "sha256": "334dede22a2c72f9223a0c3849c163f8fc2062f1ee4d3087b5486005f63eb1e2",
+   "size": 231553
+  },
+  "/archive/survey 2025/pointcloud-01.xyz": {
+   "sha256": "016fc015f34bfb81b95c248e30e0ca056817a9748544328db494ebcbd1da6d18",
+   "size": 886580
+  },
+  "/archive/survey 2025/pointcloud-02.xyz": {
+   "sha256": "f2e63476e1723fecafcd0a3a90bdc2640da34e53022cd4674b291f3e48d490c9",
+   "size": 711043
+  },
+  "/archive/survey 2025/pointcloud-03.xyz": {
+   "sha256": "46e89d9253c83b2c4371037af3aeb9f2da64a779bb53d43d56a95c04509bd38d",
+   "size": 940285
+  },
+  "/archive/survey 2025/pointcloud-04.xyz": {
+   "sha256": "66ca68e4d1395ae4df57acfe1091b62931ed1e7b5f9159ce421028c5b94143e2",
+   "size": 1038861
+  },
+  "/archive/survey 2025/pointcloud-05.xyz": {
+   "sha256": "0ab22703fc305be2a9d1cf728042d3ffc7f7ea3899a193f542c805b5c866d7e7",
+   "size": 1043130
+  },
+  "/archive/survey 2025/pointcloud-06.xyz": {
+   "sha256": "d0c150201148fb3df00d24caa29ef145c10a1ae898a526b97316b76bfa3c7c49",
+   "size": 1058120
+  },
+  "/archive/survey 2025/pointcloud-07.xyz": {
+   "sha256": "26688c6f0f06a78cf09aa542e7e74a3170d610097d83e0058d6c672ba488576c",
+   "size": 811061
+  },
+  "/archive/survey 2025/pointcloud-08.xyz": {
+   "sha256": "c6cda4e3864a88c407399915578063f5544c1e64082caf63b1df13be96ec551e",
+   "size": 1005344
+  },
+  "/archive/survey 2025/pointcloud-09.xyz": {
+   "sha256": "0017fc98ed094400d0bac15deb54c5d5a45f855b46a293dbb586ce13ef85bcac",
+   "size": 960369
+  },
+  "/finance/2024/ledger-2024-Q1.csv": {
+   "sha256": "7e5970cac01efa555d9dc1b528d94777787223a130bc6a35320b628e5b36134d",
+   "size": 389851
+  },
+  "/finance/2024/ledger-2024-Q2.csv": {
+   "sha256": "e1d36b649f1d128371bac9eb695f44e4759c06d991e578d24a25b3f3e574babf",
+   "size": 404538
+  },
+  "/finance/2024/ledger-2024-Q3.csv": {
+   "sha256": "e66c384ac5202a38882283d5c828a625044c2d336f96202b6ad940a230460750",
+   "size": 260060
+  },
+  "/finance/2024/ledger-2024-Q4.csv": {
+   "sha256": "98c12fbce841a982dc2db6cd4a85d4a964c0dc7741401b573c63b827ade27d55",
+   "size": 436030
+  },
+  "/finance/2025/ledger-2025-Q1.csv": {
+   "sha256": "5ed9240aa0e63aec8787011bcf750b90544f78fdd8672e26bf49acda7fe33aa6",
+   "size": 322739
+  },
+  "/finance/2025/ledger-2025-Q2.csv": {
+   "sha256": "2106a9cf9ecd309104c478e917b9a518497d6bb2caa1acc7712ad7b83aff8ecb",
+   "size": 506100
+  },
+  "/finance/2025/ledger-2025-Q3.csv": {
+   "sha256": "894d8a1ff829e117052ca7b4c7cbb409e685cc8193e11a796618cdfaec917d38",
+   "size": 292957
+  },
+  "/finance/2025/ledger-2025-Q4.csv": {
+   "sha256": "50b7d0f27d6abc992db5f9039cdb336a08f16c5ec050e7ef94a48292816cb625",
+   "size": 515590
+  },
+  "/finance/2026/ledger-2026-Q1.csv": {
+   "sha256": "0c65874bec73db0d75e39a6e1e4991464694a461c062db7ad9a8b8f40d6bec2d",
+   "size": 355214
+  },
+  "/finance/2026/ledger-2026-Q2.csv": {
+   "sha256": "cae5416fcfd6bbf7af799416d1cfc3d685c94ef7d2aca9f63ebad21f4b50c147",
+   "size": 286400
+  },
+  "/finance/2026/ledger-2026-Q3.csv": {
+   "sha256": "1b3deb23221954e7ea49b872e23dbb3dd8f14a5f27471c8b519bda6a205b525a",
+   "size": 454904
+  },
+  "/finance/2026/payment-run-0926.csv": {
+   "sha256": "bce285ad8871e2843f962aa15e7924887ae3b82ddca8aa001d6dabed7ce3d807",
+   "size": 136398
+  },
+  "/finance/2026/payment-run-0929.csv": {
+   "sha256": "882067836b384dcb9b7f147e8de52c05bf588b191f8e955ce92924f8fd5f6d91",
+   "size": 166969
+  },
+  "/finance/current-ledger.csv": {
+   "sha256": "50b7d0f27d6abc992db5f9039cdb336a08f16c5ec050e7ef94a48292816cb625",
+   "size": 515590
+  },
+  "/home/devin/notes.md": {
+   "sha256": "f4cf5e2a11d19d202412ba3eb3a679dff81015c29dd791d93a366aba8139e925",
+   "size": 35137
+  },
+  "/home/mara/notes.md": {
+   "sha256": "20a78b0e5d261e7ac76c315db0e73705caa596c11d02a15c02c5a3e2c5e3a3f5",
+   "size": 41711
+  },
+  "/home/mara/todo.txt": {
+   "sha256": "c9c1fe0e8f7fd49dcdb68af70f323c70588246e5de81d346cb706603552ccbbb",
+   "size": 3270
+  },
+  "/home/okafor/notes.md": {
+   "sha256": "f4ad75d3843d1132670f09c85fed604495f2bd9b68003e9d9caa8a93cc000907",
+   "size": 34427
+  },
+  "/home/okafor/todo.txt": {
+   "sha256": "73c5e0266a515ac5a90ffbd96eb6149547272cf348fcfea55dc2753f0999d338",
+   "size": 877
+  },
+  "/home/priya/handover.md": {
+   "sha256": "2fb3bf664740ee24887d82d6dc86492ff6642e6756a7f6b983c26a5e5c9b4c67",
+   "size": 14055
+  },
+  "/home/priya/notes.md": {
+   "sha256": "82c206a78fa0521990622d31c322c38a9f46c01569781e50b31b3dd4d7b4a57f",
+   "size": 11286
+  },
+  "/home/priya/todo.txt": {
+   "sha256": "f15582bd927c34c4a0a36a1ba11088b3acaf94528bb915a77882f00fff00c104",
+   "size": 4819
+  },
+  "/it/configs/host0.conf": {
+   "sha256": "cc425d2d604186ddfaa9d7b086a038f12099b9a960793abf7bcd5aade233f5e1",
+   "size": 3834
+  },
+  "/it/configs/host1.conf": {
+   "sha256": "93a58d9d00bac42f21aea8ffa31842931edba29d5b67623b7087dc8b513d038f",
+   "size": 1463
+  },
+  "/it/configs/host2.conf": {
+   "sha256": "4e27c477849f8287fe53b4ef45ed5f298817e33d0fc99ff51bd78b527fa7d940",
+   "size": 1770
+  },
+  "/it/configs/host4.conf": {
+   "sha256": "e54ef1a935805a57a3c36cc141a9fddc9c967d4aba1989a7f935a285582b83d7",
+   "size": 1728
+  },
+  "/it/configs/host5.conf": {
+   "sha256": "139cd8d17143b600c1cd0e7198dc40f5e012367d877ca8cf71ba989e15f99eeb",
+   "size": 3025
+  },
+  "/it/logs/backup.log": {
+   "sha256": "7a649149e1fac63882fb4ad17255837272b701ef3a13c88e84ec60fe80305674",
+   "size": 2192838
+  },
+  "/it/logs/kern.log": {
+   "sha256": "e3cf69c39f280f3e63dfc354e019d49384f33fcd5390fc068629abacefa0b9b3",
+   "size": 6060
+  },
+  "/it/logs/nfsd.log": {
+   "sha256": "76dcbc58367d13bb9f52cc96cb6a47c43e876105a9bb8527148203d2034b1b29",
+   "size": 1855857
+  },
+  "/it/logs/rebuild-0930.log": {
+   "sha256": "54c9e791ae5e0272c6f2cbcebb7c706ec092e692b89c66f2d169c3bc5635f8eb",
+   "size": 775725
+  },
+  "/it/logs/rsync.log": {
+   "sha256": "e1956567b2eaab3775b05dce2c532082dfb39d218d744018bd368973c70c1cb7",
+   "size": 2016777
+  },
+  "/it/logs/smbd.log": {
+   "sha256": "7bcf0b22da2570b6a04baf6d5d86d06f7e8cc63a8a8106b2eeaa2cdbfa5d81be",
+   "size": 2085042
+  },
+  "/it/vm/nas-01.vhd": {
+   "sha256": "1297928490a6c22960434a18715756dc60a5274c1349ef471585ce347957f01e",
+   "size": 2400000
+  },
+  "/it/vm/scratch.img": {
+   "sha256": "dac0899c3fd54703b73cfe9ef7af5049b2e9eb44a30acf6cae1ad5ab9961f3e5",
+   "size": 196608
+  },
+  "/photos/site visits/IMG_4100.png": {
+   "sha256": "c5eb18d31bedc408df69178573ad2af9d9c301d48f7d56f5d14fc6f50cb9eb8f",
+   "size": 88887
+  },
+  "/photos/site visits/IMG_4101.png": {
+   "sha256": "ea4ce036c96f524df02bdbd7705d759c2d91678cb46500f0ffdbebaeb5656562",
+   "size": 92287
+  },
+  "/photos/site visits/IMG_4103.png": {
+   "sha256": "8a224f80dbe2e5f8fe630d07afae082feeb66e68f1407f85293fdab5cd23e098",
+   "size": 47360
+  },
+  "/photos/site visits/IMG_4104.png": {
+   "sha256": "e8a98b32801f3dbb93d61ff6261bbd7e3acffdbcd306875b653452a973cafb34",
+   "size": 95196
+  },
+  "/photos/site visits/IMG_4105.png": {
+   "sha256": "53736949ec603b016ea17377109e47918e7170e963d0975ed86250aa5926282b",
+   "size": 49793
+  },
+  "/photos/site visits/IMG_4300.png": {
+   "sha256": "3d87364e580b11c75dd18d47f47ef91af1f0f193d3d3ad28fa0ae2171e467f0e",
+   "size": 79371
+  },
+  "/photos/site visits/IMG_4301.png": {
+   "sha256": "42930a0a89f4e113c7200e0aeb9796f176daed7eec74265535b2bff0a52cafc5",
+   "size": 104101
+  },
+  "/photos/site visits/IMG_4302.png": {
+   "sha256": "cd82f2bd97c9aa327621a10f2a3375f1abeff4cbe200db05527d111f2664e068",
+   "size": 94730
+  },
+  "/photos/site visits/IMG_4303.png": {
+   "sha256": "b182a118f1933ab7f87e2bb43b54c765ba4fb058707a691631a5e60a9595719c",
+   "size": 141796
+  },
+  "/photos/site visits/IMG_4410.png": {
+   "sha256": "b7a53140a528ffa0a1dc3adab721eb01285aa474366c6840a0c2e159efeabee9",
+   "size": 172635
+  },
+  "/photos/site visits/IMG_4411.png": {
+   "sha256": "22c43bf2f6281c3c351ab2f2a712c3e1b84e4e9594fda6e7885ed38777e685c1",
+   "size": 126938
+  },
+  "/photos/site visits/IMG_4412.png": {
+   "sha256": "003b9608a597fb764d4b576d96fa27dddc0c0ec65d4472f3baccc8b07d401341",
+   "size": 193634
+  },
+  "/photos/site visits/IMG_4413.png": {
+   "sha256": "239e5b7188da274b190a5b32b494e8e62d230e76838caaa42c432d24cc946095",
+   "size": 58272
+  },
+  "/photos/site visits/IMG_4414.png": {
+   "sha256": "799bbc2d35306a983dba723eb325999a06918b3dd82fb22bf5a84b172a2daae8",
+   "size": 70869
+  },
+  "/photos/site visits/IMG_4415.png": {
+   "sha256": "e04343350edc8824b0d308e602f47e4298b6cd874867a9edb22f37d15b6d6440",
+   "size": 93346
+  },
+  "/photos/site visits/IMG_4416.png": {
+   "sha256": "df3e86ebbe30c576f349b846e83ee00b1cf8c59abfeb896486ae856d6ec25bb3",
+   "size": 69027
+  },
+  "/photos/site visits/IMG_4417.png": {
+   "sha256": "813c99928e5ddcdb9b12ac57c5077f945bed5a590ff03d5cc76743383421abea",
+   "size": 70399
+  },
+  "/photos/site visits/IMG_4418.png": {
+   "sha256": "2a6951f255703c8e2ea908fe0fcefd35bd63fe4bbb16da40449b9cb9f7bf64e9",
+   "size": 57782
+  },
+  "/projects/P-2231 chapel yard/drawings/DET-499 revA.txt": {
+   "sha256": "376250d41e3fb5f5c342c296784cedfde81996c8781e28f8aff74cc8fe6b5bb8",
+   "size": 86981
+  },
+  "/projects/P-2231 chapel yard/drawings/ELE-266 revA.txt": {
+   "sha256": "11086cf6c1d1389f1bbccbaa0ddcf5a9fbc76e7a3b56d37436bd5b383ebc4cac",
+   "size": 165468
+  },
+  "/projects/P-2231 chapel yard/drawings/GA-201 revA (restored).txt": {
+   "sha256": "dba10f6d24b2ebb5ebec9533bf0eba83652b296aec3b1583283b9529e18e7749",
+   "size": 420235
+  },
+  "/projects/P-2231 chapel yard/drawings/GA-956 revised revC.txt": {
+   "sha256": "b6259a07dfaede86d15315b340784b32661eb418ba41f15f29c3f36f33feece2",
+   "size": 43307
+  },
+  "/projects/P-2231 chapel yard/minutes/meeting 01.md": {
+   "sha256": "b35068ed97c2adb8bcf11226e5b42a37b669c30d6d505c4e5c46f47d9ab701c6",
+   "size": 4358
+  },
+  "/projects/P-2231 chapel yard/minutes/meeting 02.md": {
+   "sha256": "41277ea93b881d0eb47034e7ef6c765f80eeb94fed31c4d5d9b4313de740d186",
+   "size": 20888
+  },
+  "/projects/P-2231 chapel yard/minutes/meeting 03.md": {
+   "sha256": "5a0e1649b2969e30c197b1224735dead67b5d3827d4fc722fefac495b2fe24c9",
+   "size": 8835
+  },
+  "/projects/P-2231 chapel yard/minutes/meeting 04.md": {
+   "sha256": "a13b201d4487c8250030014e4f10915f0aa9586b5e7b9c23384a302706658a29",
+   "size": 16460
+  },
+  "/projects/P-2231 chapel yard/src/takeoff_0.py": {
+   "sha256": "21a16dac0cfd4f6db8f15893eee249804726dc70008f0ede2001f37867a87312",
+   "size": 6655
+  },
+  "/projects/P-2264 mill annex/drawings/DET-453 revB.txt": {
+   "sha256": "8e50bf324b0ebb0144976fb2f20a8fa4e670c83c0995fe2659de05d91981ff14",
+   "size": 112724
+  },
+  "/projects/P-2264 mill annex/drawings/GA-237 revised revC.txt": {
+   "sha256": "72ebc2bc1ea90676637cf5d355cba6530887f4c27047ef865d094688a305d456",
+   "size": 137116
+  },
+  "/projects/P-2264 mill annex/drawings/GA-541 revC.txt": {
+   "sha256": "3c9c3d1d2eb0d111b1f733cf7656e3e0139cdca9d6b094bff6c8858ca79fcf11",
+   "size": 133656
+  },
+  "/projects/P-2264 mill annex/drawings/SEC-878 revB.txt": {
+   "sha256": "b9fc36bb36d3508258ff8230d10ce1e0a096b8fdf2d7ae1ae73f755dc40743cc",
+   "size": 97997
+  },
+  "/projects/P-2264 mill annex/minutes/meeting 01.md": {
+   "sha256": "3aa76805b18f4fab17a9b13fac75525fd8644e837a88e004018c665e62249e8b",
+   "size": 21791
+  },
+  "/projects/P-2264 mill annex/minutes/meeting 02.md": {
+   "sha256": "b9b2331e93b5f299f9240f5fe7e412ac6bfe9ecea4fd3c266d2e582f990391d0",
+   "size": 22544
+  },
+  "/projects/P-2264 mill annex/minutes/meeting 03.md": {
+   "sha256": "bcf41b71a2707d60d576ee470665bd5ffa2bbc47e4ee04b367471d6152be8eda",
+   "size": 6376
+  },
+  "/projects/P-2264 mill annex/minutes/meeting 04.md": {
+   "sha256": "c45c480e9458803dbe819ad204ef2ba4766dd65963217d81eb2037c9a9e9ee2f",
+   "size": 9672
+  },
+  "/projects/P-2264 mill annex/minutes/meeting 05.md": {
+   "sha256": "c11a5d2e58dfa08db5308a7067448cd42a6bdf386555e4bc4255d8a4116fc0f3",
+   "size": 18998
+  },
+  "/projects/P-2264 mill annex/src/takeoff_0.py": {
+   "sha256": "8feda45eea186405399d9f3da648033ebc5631dede9e2e13c1005f4b351bd89b",
+   "size": 8292
+  },
+  "/projects/P-2264 mill annex/src/takeoff_1.py": {
+   "sha256": "25732e0349a0d98f44b81d9b3eeabaa11eecfa8aca1fe2106780d16286fcd81b",
+   "size": 10138
+  },
+  "/projects/P-2291 harbour lofts/drawings/DET-997 revA.txt": {
+   "sha256": "3caaf29f1bbf2a31b8103a417e6cb4146336f6d45f35e33805d71fb290cf5d2d",
+   "size": 60957
+  },
+  "/projects/P-2291 harbour lofts/drawings/ELE-315 revA.txt": {
+   "sha256": "1c8fb24ec68016cea18d4188df65e526f55866479eb294af0f6b0947d08eb2fd",
+   "size": 169060
+  },
+  "/projects/P-2291 harbour lofts/drawings/GA-363 revB.txt": {
+   "sha256": "4cbb9c6482ec4b84b1135a128ebf1cb630ab0efd52fbb8528c43ab5df9224edb",
+   "size": 99891
+  },
+  "/projects/P-2291 harbour lofts/drawings/SEC-546 revised revA.txt": {
+   "sha256": "1ff05d77bab04f87a9884b44c554ee6c593446a36a42742f6c29780dfe34ab16",
+   "size": 60640
+  },
+  "/projects/P-2291 harbour lofts/minutes/meeting 01.md": {
+   "sha256": "1ce9f480b72c0f2743a1b98f048450a0f9b50890b8f91422dff31655c2daddc4",
+   "size": 14488
+  },
+  "/projects/P-2291 harbour lofts/minutes/meeting 02.md": {
+   "sha256": "7a47b4039655396e7d1e91208ebd9607649f766cd91cdf3cdd28308724fd735a",
+   "size": 19007
+  },
+  "/projects/P-2291 harbour lofts/minutes/meeting 03.md": {
+   "sha256": "6d47c7c26cfe33d7e4bad906d6c5e2332a5867d327fa8d5a177008865c1391dc",
+   "size": 6914
+  },
+  "/projects/P-2291 harbour lofts/minutes/meeting 04.md": {
+   "sha256": "6af4d3213afb24f214b11d98de04f84126315c95ce3074864d76420f04220b90",
+   "size": 5764
+  },
+  "/projects/P-2291 harbour lofts/minutes/meeting 05.md": {
+   "sha256": "74d8c93e7d3d94b82a5e6a16364c7c57ce765f4123f994a0ed0d8c66d391fe31",
+   "size": 18809
+  },
+  "/projects/P-2291 harbour lofts/src/schedule.py": {
+   "sha256": "62a1db7f4cf55f52076561ad125053dc20e75af5099fa07a1ea7ffe8976f6d18",
+   "size": 12404
+  },
+  "/projects/P-2291 harbour lofts/src/takeoff_0.py": {
+   "sha256": "288e73284738c226f1885db7f21dd83e2532135654d8dcc0cc248d9708dcb0d0",
+   "size": 4541
+  },
+  "/projects/P-2303 quay studios/drawings/ELE-420 revC.txt": {
+   "sha256": "b67e9800a3e5e26a99c0450e5c456b580d35e43db67e6314875688b42c45e5f0",
+   "size": 152717
+  },
+  "/projects/P-2303 quay studios/drawings/ELE-488 revB.txt": {
+   "sha256": "ca01ceeffa945f325ae47251098e2526cb249ccbc4ac5a0082f781f66e3568c2",
+   "size": 66029
+  },
+  "/projects/P-2303 quay studios/drawings/GA-582 revB.txt": {
+   "sha256": "15f659a27cc3c0a418f4ff47907ff323b17f7d6e2c127aa7fc4b5c3407b6d265",
+   "size": 87314
+  },
+  "/projects/P-2303 quay studios/drawings/SEC-634 revised revB.txt": {
+   "sha256": "77e7840ee06500e690dec4e94c343213d84616e260adf767f01867d7818565c3",
+   "size": 113609
+  },
+  "/projects/P-2303 quay studios/minutes/meeting 01.md": {
+   "sha256": "93d9bdfc3c09fdeb41e7f669298dd8ca80da1008e000ddb6a0b388edb82ff022",
+   "size": 16444
+  },
+  "/projects/P-2303 quay studios/minutes/meeting 02.md": {
+   "sha256": "557b72f3355d88b27e47ce0ecfd8e52b282ccbfbc3a811a0fbb276321768c26f",
+   "size": 15400
+  },
+  "/projects/P-2303 quay studios/minutes/meeting 03.md": {
+   "sha256": "67d041f65604e8c5347ea7c94ea44e100eeff9c4dffcecf89a7e27dbdbd94711",
+   "size": 14562
+  },
+  "/projects/P-2303 quay studios/src/schedule.py": {
+   "sha256": "7d9908e102972cad2ec3da5155f44b076c135f912e8c0dc37354e4b70319b1f0",
+   "size": 9641
+  },
+  "/projects/P-2303 quay studios/src/takeoff_0.py": {
+   "sha256": "b79f8073df8b002c0ccff40edc2cdf3945a26430d306d6714eefdac2945b1a50",
+   "size": 8135
+  },
+  "/projects/P-2303 quay studios/src/takeoff_1.py": {
+   "sha256": "e3509c3b45ceb70d1dda4c85e3d52cdd9ca34c0ba4bc589028f0b242d5967636",
+   "size": 2869
+  },
+  "/projects/P-2303 quay studios/src/takeoff_2.py": {
+   "sha256": "2799ae85e8f20ecb3c067d06f24e886b5ba596111af9c368db41e2cd3ccb4267",
+   "size": 8504
+  },
+  "/projects/P-2318 terrace mill/drawings/GA-110 revA.txt": {
+   "sha256": "8ad378fcc2dfe5f8be22ff843a0a5e3a87c33bedb0b49e769a541635bcfd095d",
+   "size": 128634
+  },
+  "/projects/P-2318 terrace mill/drawings/GA-111 revA.txt": {
+   "sha256": "c00fa891ab93ce557b88248725ad3e3882bd5f5191af7609f1542688d01e92d4",
+   "size": 139633
+  },
+  "/projects/P-2318 terrace mill/drawings/GA-112 revA.txt": {
+   "sha256": "dee4df8c1e5bf08e360de4a149c59001be5a7f2ed54904b09510c3c9d7b61314",
+   "size": 97868
+  },
+  "/projects/P-2318 terrace mill/drawings/GA-113 revA.txt": {
+   "sha256": "716213eed2deb677daf40008d8e2472a8d30cd9bce63699c6073525038891ba5",
+   "size": 37095
+  },
+  "/projects/P-2318 terrace mill/minutes/meeting 01.md": {
+   "sha256": "b2dbf7929b673c4849275bd723af77595bc902055537850771534f184926e1b1",
+   "size": 9099
+  }
+ },
+ "lost": [
+  "/admin/policy-04.md",
+  "/admin/policy-05.md",
+  "/admin/policy-06.md",
+  "/archive/scans/scan-2026-16.txt",
+  "/archive/scans/scan-2026-17.txt",
+  "/finance/2024/ledger-2024-Q1.csv",
+  "/finance/2024/ledger-2024-Q2.csv",
+  "/finance/2024/ledger-2024-Q3.csv",
+  "/finance/2024/ledger-2024-Q4.csv",
+  "/home/devin/notes.md",
+  "/home/mara/notes.md",
+  "/home/okafor/notes.md",
+  "/home/priya/notes.md",
+  "/it/logs/rebuild-0930.log",
+  "/photos/site visits/IMG_4103.png",
+  "/photos/site visits/IMG_4412.png",
+  "/photos/site visits/IMG_4413.png",
+  "/photos/site visits/IMG_4414.png",
+  "/photos/site visits/IMG_4415.png",
+  "/photos/site visits/IMG_4416.png",
+  "/photos/site visits/IMG_4417.png",
+  "/photos/site visits/IMG_4418.png",
+  "/projects/P-2231 chapel yard/drawings/GA-201 revA (restored).txt",
+  "/projects/P-2231 chapel yard/drawings/GA-956 revised revC.txt",
+  "/projects/P-2231 chapel yard/minutes/meeting 01.md",
+  "/projects/P-2231 chapel yard/minutes/meeting 02.md",
+  "/projects/P-2231 chapel yard/minutes/meeting 03.md"
+ ]
+}

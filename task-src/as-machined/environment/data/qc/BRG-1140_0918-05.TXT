@@ -1,0 +1,82 @@
+PC-DMIS 2023.2 MR1                                   PAGE 1
+PART NAME  : BRG-1140
+REV NUMBER : B
+SER NUMBER : 0918-05
+STATS COUNT: 1
+DATE=9/18/2026  TIME=14:05:07  OPERATOR=DMK  MACHINE=GLOBAL S 07.10.07
+
+A1         =ALIGNMENT/START,RECALL:STARTUP,LIST=YES
+              ALIGNMENT/LEVEL,ZPLUS,PLN_A
+              ALIGNMENT/ROTATE,XPLUS,TO,LIN_B,ABOUT,ZPLUS
+              ALIGNMENT/TRANS,XAXIS,PLN_C
+              ALIGNMENT/TRANS,YAXIS,LIN_B
+              ALIGNMENT/TRANS,ZAXIS,PLN_A
+            ALIGNMENT/END
+  (datum A bottom face, B front face, C left end face)
+
+DIM CIR_DWL1= LOCATION OF CIRCLE CIR_DWL1  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       10.0000     0.0500     0.0500    10.2996     0.2996     0.2496  ----#
+Y       30.0000     0.0500     0.0500    30.0002     0.0002     0.0000
+D        6.8000     0.0250     0.0250     6.7992    -0.0008     0.0000
+
+DIM CIR_DWL2= LOCATION OF CIRCLE CIR_DWL2  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       80.0000     0.0500     0.0500    80.2993     0.2993     0.2493  ----#
+Y       30.0000     0.0500     0.0500    30.0020     0.0020     0.0000
+D        6.8000     0.0250     0.0250     6.7993    -0.0007     0.0000
+
+DIM CIR_ROW1= LOCATION OF CIRCLE CIR_ROW1  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       27.5000     0.0500     0.0500    27.3997    -0.1003     0.0503  ----#
+Y       53.0000     0.0500     0.0500    53.3009     0.3009     0.2509  ----#
+D        6.6000     0.0250     0.0250     6.8013     0.2013     0.1763  ----#
+DP      10.0000     0.0500     0.0500     7.9587    -2.0413     1.9913  ----#
+
+DIM CIR_ROW2= LOCATION OF CIRCLE CIR_ROW2  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       42.5000     0.0500     0.0500    42.3999    -0.1001     0.0501  ----#
+Y       53.0000     0.0500     0.0500    53.2973     0.2973     0.2473  ----#
+D        6.6000     0.0250     0.0250     6.7986     0.1986     0.1736  ----#
+DP      10.0000     0.0500     0.0500     7.9577    -2.0423     1.9923  ----#
+
+DIM CIR_ROW3= LOCATION OF CIRCLE CIR_ROW3  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       57.5000     0.0500     0.0500    57.4011    -0.0989     0.0489  ----#
+Y       53.0000     0.0500     0.0500    53.3008     0.3008     0.2508  ----#
+D        6.6000     0.0250     0.0250     6.8018     0.2018     0.1768  ----#
+DP      10.0000     0.0500     0.0500     7.9572    -2.0428     1.9928  ----#
+
+DIM CIR_ROW4= LOCATION OF CIRCLE CIR_ROW4  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       72.5000     0.0500     0.0500    72.3987    -0.1013     0.0513  ----#
+Y       53.0000     0.0500     0.0500    53.3028     0.3028     0.2528  ----#
+D        6.6000     0.0250     0.0250     6.8006     0.2006     0.1756  ----#
+DP      10.0000     0.0500     0.0500     7.9562    -2.0438     1.9938  ----#
+
+DIM PKT_1= LOCATION OF FEATURE PKT_1  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       45.0000     0.0500     0.0500    44.9022    -0.0978     0.0478  ----#
+Y       30.0000     0.0500     0.0500    30.3020     0.3020     0.2520  ----#
+L       50.0000     0.1000     0.1000    50.0004     0.0004     0.0000
+W       30.0000     0.1000     0.1000    29.9974    -0.0026     0.0000
+DP      12.0000     0.0500     0.0500    12.1208     0.1208     0.0708  ----#
+
+DIM SLOT_KEY= LOCATION OF FEATURE SLOT_KEY  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+X       45.0000     0.0500     0.0500    45.3011     0.3011     0.2511  ----#
+W       10.0000     0.1000     0.1000    10.0027     0.0027     0.0000
+
+DIM PLN_TOP= DISTANCE OF FEATURE PLN_TOP  UNITS=MM ,$
+GRAPH=OFF  TEXT=OFF  MULT=10.00  OUTPUT=BOTH  HALF ANGLE=NO
+AX       NOMINAL       +TOL       -TOL       MEAS        DEV     OUTTOL
+Z       40.0000     0.0500     0.0500    39.9988    -0.0012     0.0000
+

@@ -1,0 +1,14 @@
+<additional>
+    <laneAreaDetector id="bb_a_12_0" lane="a_12_0" pos="0.1" endPos="312.30" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_12_1" lane="a_12_1" pos="0.1" endPos="312.30" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_21_0" lane="a_21_0" pos="0.1" endPos="312.30" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_21_1" lane="a_21_1" pos="0.1" endPos="312.30" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_23_0" lane="a_23_0" pos="0.1" endPos="215.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_23_1" lane="a_23_1" pos="0.1" endPos="215.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_32_0" lane="a_32_0" pos="0.1" endPos="215.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_32_1" lane="a_32_1" pos="0.1" endPos="215.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_34_0" lane="a_34_0" pos="0.1" endPos="45.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_34_1" lane="a_34_1" pos="0.1" endPos="45.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_43_0" lane="a_43_0" pos="0.1" endPos="45.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+    <laneAreaDetector id="bb_a_43_1" lane="a_43_1" pos="0.1" endPos="45.50" period="1" file="bb.xml" timeThreshold="1.0" speedThreshold="1.4" jamThreshold="10.0"/>
+</additional>

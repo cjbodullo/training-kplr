@@ -1,0 +1,15 @@
+seat plan for customer service at a small uk energy supplier, week of 1 march. phones run on asterisk 20.6 (pbx01, app_queue). three queues, `billing`, `moving` and `faults`. an agent only ever sits on one of them.
+
+what you have. `/app/pbx/queue_log` is everything app_queue wrote from monday 11 jan to saturday 20 feb 2027. times are epoch seconds and we were on GMT the whole stretch, so epoch is local time. `/app/pbx/queues.conf` and `/app/pbx/extensions.conf` are the live config pulled off pbx01 this week. one change went in after the log stops. faults `wrapuptime` moved from 20 to 60 on 22 feb, so the whole log ran at 20 and march runs at 60. then `/app/forecast/2027-03-01.csv` from the forecasting team, expected calls per queue per open half hour for mon 1 to sat 6 march. they only count what callers pick in the ivr. billing agents blind transfer some calls over to moving (ext 6002) and none of those are in the forecast, so treat them as landing in moving in the same half hour they leave billing.
+
+i want `/app/plan.csv` back with header `date,interval_start,queue,seats` and one row per queue for every half hour we are open. weekdays thats starts from `08:00` to `19:30`, saturday `09:00` to `16:30`. date like `2027-03-01`, interval_start in local time like `08:30`, seats a whole number. 408 rows.
+
+seats means agents logged in to that queue and not paused for `Break` or `Lunch`. wrap up and `ACW` pauses are part of doing a call. they do not come off seats.
+
+targets are the same in every half hour on every queue. service level at least 80% and abandon rate at most 5%. service level for us is calls answered with a hold time of 20s or less, divided by answered plus abandoned after waiting 10s or more plus timed out. hold time is the one asterisk logs on `CONNECT`. abandon rate is calls abandoned after 10s or more over all calls that entered the queue. abandons under 10s are noise to us (misdials, people who wanted another option) and they stay out of both numbers. a transferred call counts in moving as well as in billing.
+
+smallest seat count that hits both. not padded, finance reads this.
+
+how i check it. each half hour gets looked at on its own in steady state. calls arrive at random (poisson) at the forecast rate, seats stay fixed for the half hour, first come first served, and callers and agents behave the way they did in jan and feb apart from that wrap up change. from that i know what every half hour really needs and i compare. six weeks of log only pins things down so far, so i take one seat either side of that number. further out than that the row fails. one bad row and the plan comes back.
+
+You have 14400 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.

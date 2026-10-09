@@ -1,0 +1,35 @@
+site,channel,approach,lane,loop,distance_to_stop_line_m,sumo_lane
+J1,D1,A-road eastbound,nearside (left + ahead),stop line,2,a_w_in_0
+J1,D2,A-road eastbound,offside (ahead),stop line,2,a_w_in_1
+J1,D3,A-road eastbound,nearside (left + ahead),upstream,160,a_w_in_0
+J1,D4,A-road eastbound,offside (ahead),upstream,160,a_w_in_1
+J1,D5,A-road westbound,nearside (left + ahead),stop line,2,a_21_0
+J1,D6,A-road westbound,offside (ahead),stop line,2,a_21_1
+J1,D7,Mill Lane southbound,single lane,stop line,2,j1n_in_0
+J1,D8,Mill Lane southbound,single lane,upstream,160,j1n_in_0
+J1,D9,Fenwick Road northbound,single lane,stop line,2,j1s_in_0
+J1,D10,Fenwick Road northbound,single lane,upstream,160,j1s_in_0
+J2,D1,A-road eastbound,nearside (ahead),stop line,2,a_12_0
+J2,D2,A-road eastbound,offside (ahead),stop line,2,a_12_1
+J2,D3,A-road westbound,nearside (left + ahead),stop line,2,a_32_0
+J2,D4,A-road westbound,offside (ahead),stop line,2,a_32_1
+J2,D5,Orchard Way northbound (estate),nearside (left),stop line,2,j2s_in_0
+J2,D6,Orchard Way northbound (estate),offside (right),stop line,2,j2s_in_1
+J2,D7,Orchard Way northbound (estate),nearside (left),upstream,160,j2s_in_0
+J2,D8,Orchard Way northbound (estate),offside (right),upstream,160,j2s_in_1
+J3,D1,A-road eastbound,nearside (left + ahead),stop line,2,a_23_0
+J3,D2,A-road eastbound,offside (ahead),stop line,2,a_23_1
+J3,D3,A-road westbound,nearside (ahead),stop line,2,a_43_0
+J3,D4,A-road westbound,offside (ahead),stop line,2,a_43_1
+J3,D5,School Lane southbound,single lane (left + right),stop line,2,j3n_in_0
+J3,D6,School Lane southbound,single lane (left + right),upstream,160,j3n_in_0
+J4,D1,A-road eastbound,nearside (left + ahead),stop line,2,a_34_0
+J4,D2,A-road eastbound,offside (ahead),stop line,2,a_34_1
+J4,D3,A-road westbound,nearside (left + ahead),stop line,2,a_e_in_0
+J4,D4,A-road westbound,offside (ahead),stop line,2,a_e_in_1
+J4,D5,A-road westbound,nearside (left + ahead),upstream,160,a_e_in_0
+J4,D6,A-road westbound,offside (ahead),upstream,160,a_e_in_1
+J4,D7,Station Road southbound,single lane,stop line,2,j4n_in_0
+J4,D8,Station Road southbound,single lane,upstream,160,j4n_in_0
+J4,D9,Kiln Road northbound,single lane,stop line,2,j4s_in_0
+J4,D10,Kiln Road northbound,single lane,upstream,160,j4s_in_0

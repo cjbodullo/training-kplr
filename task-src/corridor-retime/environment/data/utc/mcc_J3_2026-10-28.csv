@@ -1,0 +1,41 @@
+period_start,from_arm,to_arm,cars
+07:30,A-road east arm,A-road west arm,163
+07:30,A-road west arm,A-road east arm,259
+07:30,A-road west arm,School Lane,1
+07:30,School Lane,A-road east arm,4
+07:30,School Lane,A-road west arm,1
+07:45,A-road east arm,A-road west arm,191
+07:45,A-road west arm,A-road east arm,282
+07:45,A-road west arm,School Lane,0
+07:45,School Lane,A-road east arm,3
+07:45,School Lane,A-road west arm,5
+08:00,A-road east arm,A-road west arm,181
+08:00,A-road west arm,A-road east arm,267
+08:00,A-road west arm,School Lane,3
+08:00,School Lane,A-road east arm,7
+08:00,School Lane,A-road west arm,10
+08:15,A-road east arm,A-road west arm,182
+08:15,A-road west arm,A-road east arm,287
+08:15,A-road west arm,School Lane,14
+08:15,School Lane,A-road east arm,6
+08:15,School Lane,A-road west arm,14
+08:30,A-road east arm,A-road west arm,176
+08:30,A-road west arm,A-road east arm,269
+08:30,A-road west arm,School Lane,9
+08:30,School Lane,A-road east arm,8
+08:30,School Lane,A-road west arm,10
+08:45,A-road east arm,A-road west arm,155
+08:45,A-road west arm,A-road east arm,276
+08:45,A-road west arm,School Lane,4
+08:45,School Lane,A-road east arm,4
+08:45,School Lane,A-road west arm,2
+09:00,A-road east arm,A-road west arm,131
+09:00,A-road west arm,A-road east arm,204
+09:00,A-road west arm,School Lane,0
+09:00,School Lane,A-road east arm,5
+09:00,School Lane,A-road west arm,5
+09:15,A-road east arm,A-road west arm,89
+09:15,A-road west arm,A-road east arm,157
+09:15,A-road west arm,School Lane,0
+09:15,School Lane,A-road east arm,6
+09:15,School Lane,A-road west arm,5

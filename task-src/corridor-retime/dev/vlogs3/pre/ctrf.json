@@ -1,0 +1,197 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-10-08T18:15:19.088250+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 12,
+            "passed": 2,
+            "failed": 10,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1791483205952,
+            "stop": 1791483319065
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_plan.py::test_controller_rules",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791483205969,
+                "stop": 1791483205970,
+                "retries": 0,
+                "file_path": "test_plan.py"
+            },
+            {
+                "name": "test_plan.py::test_sealed_days_found",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791483205971,
+                "stop": 1791483205971,
+                "retries": 0,
+                "file_path": "test_plan.py"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 112998,
+                "start": 1791483205971,
+                "stop": 1791483318969,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day1'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1225 s to enter\nE       assert 1225.1 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 34,
+                "start": 1791483318983,
+                "stop": 1791483319017,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day10'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1345 s to enter\nE       assert 1345.0 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 10,
+                "start": 1791483319017,
+                "stop": 1791483319027,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day2'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 995 s to enter\nE       assert 995.1 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1791483319027,
+                "stop": 1791483319033,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day3'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1458 s to enter\nE       assert 1458.0 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": 1791483319034,
+                "stop": 1791483319038,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day4'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 2519 s to enter\nE       assert 2518.8 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5,
+                "start": 1791483319039,
+                "stop": 1791483319044,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day5'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1784 s to enter\nE       assert 1784.2 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": 1791483319045,
+                "stop": 1791483319049,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day6'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1305 s to enter\nE       assert 1304.8 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1791483319049,
+                "stop": 1791483319055,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day7'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1877 s to enter\nE       assert 1876.9 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": 1791483319055,
+                "stop": 1791483319059,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day8'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 2007 s to enter\nE       assert 2006.9 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1791483319059,
+                "stop": 1791483319065,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "tags": [
+                    "parametrize::day::['day1', 'day10', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7', 'day8', 'day9']"
+                ],
+                "trace": "results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 1225.1, ...}, 'day10': {'teleports': 0, 'lo...epart_delay': 995.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 1458.0, ...}, ...}\nday = 'day9'\n\n    @pytest.mark.parametrize(\"day\", DAYS)\n    def test_day(results, day):\n        m = results[day]\n        assert \"error\" not in m, f\"sumo failed: {m.get('error')}\"\n        assert m[\"teleports\"] == 0, f\"{m['teleports']} teleports (gridlock)\"\n        assert m[\"arrived\"] == m[\"loaded\"], f\"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00\"\n>       assert m[\"depart_delay\"] <= MAX_DEPART_DELAY, \\\n            f\"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter\"\nE       AssertionError: queue past the edge of the model: a vehicle waited 1039 s to enter\nE       assert 1038.7 <= 300.0\n\ntest_plan.py:161: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

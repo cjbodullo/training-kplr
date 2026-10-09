@@ -1,0 +1,218 @@
+artifacts = ["/app/denom.json"]
+
+[task]
+name = "afterquery/denom-set"
+
+[metadata]
+author_name = "Sayan Banerjee"
+author_email = "sayanbanerjee.writodesk@gmail.com"
+difficulty_explanation = """
+Everything somebody joining this team would be handed is in the container. \
+CSP-114 is the approved protocol and it states the shape of the answer \
+outright -- ( required union observed ) intersect admissible -- names the two \
+required specialty groups, states that a named group names everything beneath \
+it, states that adult means 16 or over and that nobody under 16 is in scope by \
+any route, states that a site's agreement is tested at the day of admission, states that \
+a required class is met by a stay anywhere in the encounter, states that a \
+score counts toward OBSERVED only where the banner rendered it, defines the \
+quarter an encounter belongs to, and lists every file and every column. \
+Section 5 records the two questions the safety group was asked and declined to \
+answer, so the reader is told which axes are open and is left to settle them. One whole \
+quarter, 2025Q3, ships with its published denominator encounter by encounter, \
+and kit/priorcheck.py diffs a candidate against it. draft.py runs and writes a \
+well formed file. holdshape.py runs and holds a file to the shape. \
+\
+What is not in the container is any rule for the boundaries. The set has never \
+existed as data: an analyst assembled it each quarter by hand and the working \
+was never kept, which is why the group is authoring it rather than recovering \
+it. What the container holds instead is our own side of two years of consuming \
+one: DM_RETURN.pkb builds the external return off a posted denominator, \
+SafetyPack.vb prints the pack the safety group takes into the meeting, and \
+platform.scala partitions a posted set for the performance computation. None \
+of the three runs here and none of them could -- the warehouse schema does not \
+leave the warehouse, the trust framework assemblies are licensed to one build \
+box, and the cluster and its kb.* libraries are absent. They are evidence. \
+Evidence is not an oracle. \
+\
+Two readings are graded and each was ablated over the 380 encounters by \
+flipping it to a named alternative a careful person otherwise lands on, \
+counted in encounters moved of 380 and quarters moved of 3. A shadow score \
+counts as the model having run when the ward itself was live and does not \
+while the ward was still in rollout (30/3 if a shadow score never counts, 29/2 \
+if it always does; it is a three way choice and both blanket answers are \
+wrong). A dissent closes the patient out and a study exclusion does not (30/3 \
+if any register entry closes them out). \
+\
+The protocol names three open questions, not two. The third, whether OBSERVED \
+turns on a score being produced or on it being seen, is named and left \
+unanswered like the others, and it is settled by DEMONSTRATION rather than by \
+statement: the published 2025Q3 carries live scores the banner never rendered, \
+and holding a candidate quarter against it through kit/priorcheck.py settles \
+it. It moves 21 of the 380. A fourth convention, whether a dissent reaches \
+back over an encounter already admitted, is settled the same way and moves 15. \
+\
+A third convention, whether a dissent reaches back over an encounter that was \
+already admitted, is settled outright by the published 2025Q3, which carries \
+seven dissents recorded after admission and holds those encounters. It moves \
+11 of the 391 and it is not withheld. \
+\
+The count is measured from both edges rather than guessed, on one engine with \
+the same data and the same verifier throughout. Four readings with the axes \
+unnamed: difficulty 0 of 8, trials completing cleanly in 678-867 s of a 14400 \
+s budget. Two readings with the third STATED in the protocol: easiness solved \
+it 2 of 3 at 369 and 427 s, one over its cap. Three readings all withheld: \
+easiness 0 of 3 and difficulty 0 of 8 again at 644-1255 s. One whole reading \
+turns out to span the band, so this build moves the third axis by a half step \
+instead: it stays named and unanswered, and the published quarter demonstrates \
+it rather than the protocol asserting it, which costs the reader a diff they \
+have to think to run. What carries the difficulty is that every blanket answer \
+is wrong on all of the axes, not the number of them. \
+\
+The evidence is deliberately two sided and neither side is enough alone. The \
+three consumers only ever refuse: DM_RETURN raises on a posted encounter with \
+neither a named stay nor a rendered live score, on one admitted outside its \
+site's agreement, and on one under 16; platform.scala rejects a posted \
+encounter whose only evidence is a shadow score off a ward in rollout. A \
+reading that admits fewer encounters passes every one of them. The other \
+direction comes only off the two published returns from the quarters whose \
+rows are gone: unrun_moved_off 7, silent_live_ward 8 against \
+silent_rollout_ward 0, late_dissent 13, study_excluded_in 25. \
+\
+dev/audit.py proves the published 2025Q3 is byte identical under every single \
+flip of the two graded readings and under both at once, and that it does move \
+under the two conventions it is meant to settle, and that it does move \
+under the dissent dating flip, so the one worked quarter settles the mechanics \
+and neither of the two. dev/rivals.py sweeps further readings of the \
+published machinery and each either moves nothing or is settled by 2025Q3. \
+\
+Nothing here can be self checked. 2025Q3 carries nothing on either of \
+the two graded axes by construction -- no shadow score, no unrendered live score, no \
+study exclusion, no unsigned or part signed site, nobody under 16 and no ward \
+transfer. The three graded quarters were never published in any form. The \
+shipped first cut agrees with the sealed answer on none of the three quarters \
+and is out by 79 encounters.
+"""
+solution_explanation = """
+The method is to read the three consumers and the two surviving returns and \
+ask, of everything they do off the back of a posted denominator, what the \
+analyst must have been doing for that to make sense. solution/denom.py is the \
+answer and its module docstring names every reading. \
+\
+The consumers are one sided by construction: every check in them refuses a \
+posted encounter for being one we cannot stand behind. DM_RETURN.check_post \
+raises -20031 on an encounter with neither a stay on a named ward nor a live \
+score with surfaced = 1, which is what fixes a rendered live score as evidence \
+and an unrendered one as nothing; -20032 on e.admitted < g.dsa_from; -20033 under 16. \
+platform.scala's place() rejects an encounter whose only evidence is a shadow \
+score off a ward whose stage is not live, and routes one off a live ward into \
+the silent partition. \
+\
+Everything those cannot see comes off ours/returns, and only off them. \
+silent_live_ward 8 against \
+silent_rollout_ward 0 is the same split platform.scala refuses on, in the \
+other direction. study_excluded_in counts denominator encounters whose patient carries a \
+study exclusion that was already on file, so a study exclusion is not a \
+dissent. SafetyPack.vb backs both: SheetLateDissent is a worklist built out of \
+the posted set for exactly those encounters, and SheetEncounters iterates \
+every stay and prints the named wards as a list. \
+\
+solve.sh installs the reference, writes /app/denom.json, holds it to the \
+shipped shape check, and runs the same reading of the sources over 2025Q3 \
+through the shipped prior diff. dev/seal.py cuts the sealed file only after an \
+independently written second implementation (dev/model.py, which builds the \
+three sets whole and intersects them, sharing no helper) agrees on every one \
+of the 380 encounters, the shipped 2025Q3 matches the reference, the published \
+quarter is not graded, and no shipped byte carries a graded quarter's set.
+"""
+verification_explanation = """
+What is graded is data. The agent leaves /app/denom.json and the verifier \
+reads it with json.load and compares sets of strings. Nothing the agent wrote \
+is imported, executed or evaluated anywhere in the grader, so there is no \
+module to load, no interpreter shared with agent code and no object whose \
+__eq__ could reach a comparison. \
+\
+The sealed denominator lives only in the verifier image under /tests, root \
+owned and mode 0700. The agent's container holds the source data, which is \
+input, and no denominator for any graded quarter in any form: no reference, no \
+generator, no counts. The one denominator that does ship is 2025Q3, a quarter \
+that is not graded, and every single flip of every graded reading leaves it \
+identical, so the worked quarter fixes the shape and settles nothing. The two \
+surviving returns are aggregate lines for quarters whose rows are not in the \
+container at all. holdshape.py reads only the agent's file and the source data \
+beside it. \
+\
+Shape is checked first: that the file parses as an object keyed on quarter, \
+that it covers exactly the three graded quarters and no others, that each \
+entry is a list of encounter id strings with no repeats. Then every quarter's \
+set is compared. Reward is 1 only when the file reads, the quarters are \
+covered exactly, every entry is well formed, and each quarter's set is exactly \
+the sealed set with nothing extra and nothing missing. reward.txt is written \
+from pytest's exit code on every path, including a missing file, unparseable \
+JSON and a crash. For a failing file the report gives, per quarter, how many \
+were sealed against how many posted, how many are extra and how many missing, \
+and a sample of each. \
+\
+Measured here: the reference scores 1 at 380 of 380 and the shipped first cut \
+scores 0, out by 79 encounters and wrong on all three quarters. Six cheats \
+score 0. Hunting the container finds no denominator for a graded quarter. \
+Posting the published 2025Q3 under the graded quarter names matches nothing, \
+because no 2025Q3 encounter was admitted in a graded quarter. A file written \
+to satisfy holdshape.py and nothing else passes holdshape.py and fails. \
+Admitting everything the terms permit -- every adult encounter at a site \
+inside its agreement whose patient the register does not name -- fails, which \
+is the point of the union. Writing a reward file inside the agent container \
+achieves nothing, because the verifier runs in its own image and writes its \
+own after pytest has exited.
+"""
+category = "ML"
+subcategory = "Evaluation"
+tags = ["model-monitoring", "clinical-ml", "cohort-definition",
+        "data-governance", "audit", "python"]
+expert_time_estimate_hours = 7
+relevant_experience = """
+I have spent a lot of my working life on the reporting end of deployed models, \
+which is the part where somebody outside the team finally asks what the \
+numbers were computed over. The answer is almost never written down. There is \
+a protocol that names classes at the level a committee can agree on, there is \
+a feed that says what actually happened, and there is a governance position \
+that says what you may touch, and the join between the three lives in the head \
+of whoever has been doing it. \
+\
+That join is where the work is, and it is genuinely two sided in a way people \
+underestimate. Put a patient in who should not be there and it is a \
+governance incident. Leave one out and every rate you publish is wrong in a \
+direction that flatters you, which is worse. There is no conservative play. I \
+have sat in the meeting where a regulator asked why the denominator moved \
+between two quarters and the honest answer was that a different person \
+assembled it. \
+\
+Two of the readings in here are ones I have argued about for real. The first \
+is whether a score the clinician never saw counts as the model having run: it \
+decides whether you are reporting on the model or on the deployment, and the \
+two diverge quickly once banners start getting suppressed. The second is what \
+a dissent does to an episode of care that was already under way when it was \
+recorded, which is a question about what the patient was consenting to and \
+which every trust I have worked with answers slightly differently. \
+\
+So the split here is the split the job has. All the plumbing is handed over, \
+because plumbing is what a colleague gets on their first morning: the \
+protocol, the directory, the calendar, the columns, a fully worked quarter, a \
+first cut, a shape check and a diff. The boundary readings are not handed \
+over, because there is nothing to hand over. They were never written down, and \
+a set you assemble yourself and then check against itself only tells you what \
+you already believed.
+"""
+
+[verifier]
+timeout_sec = 900.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 14400.0
+
+[environment]
+build_timeout_sec = 900.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+gpus = 0

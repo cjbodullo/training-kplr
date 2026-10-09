@@ -1,0 +1,44 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 12 items
+
+test_plan.py::test_controller_rules PASSED
+test_plan.py::test_sealed_days_found PASSED
+test_plan.py::test_day[day1] day1 {'teleports': 0, 'loaded': 9326, 'arrived': 9326, 'depart_delay': 4.0, 'block_back': {'a_43_1': 5, 'a_43_0': 9}}
+day10 {'teleports': 0, 'loaded': 9238, 'arrived': 9238, 'depart_delay': 5.5, 'block_back': {'a_43_1': 1}}
+day2 {'teleports': 0, 'loaded': 8576, 'arrived': 8576, 'depart_delay': 4.0, 'block_back': {}}
+day3 {'teleports': 0, 'loaded': 8800, 'arrived': 8800, 'depart_delay': 3.5, 'block_back': {'a_43_0': 36, 'a_43_1': 29}}
+day4 {'teleports': 0, 'loaded': 9109, 'arrived': 9109, 'depart_delay': 5.3, 'block_back': {'a_43_1': 16, 'a_43_0': 12}}
+day5 {'teleports': 0, 'loaded': 9052, 'arrived': 9052, 'depart_delay': 5.6, 'block_back': {}}
+day6 {'teleports': 0, 'loaded': 9293, 'arrived': 9293, 'depart_delay': 5.1, 'block_back': {'a_43_1': 24}}
+day7 {'teleports': 0, 'loaded': 8815, 'arrived': 8815, 'depart_delay': 4.7, 'block_back': {'a_43_1': 23, 'a_43_0': 23}}
+day8 {'teleports': 0, 'loaded': 8972, 'arrived': 8972, 'depart_delay': 3.6, 'block_back': {'a_43_1': 5}}
+day9 {'teleports': 0, 'loaded': 9099, 'arrived': 9099, 'depart_delay': 5.2, 'block_back': {'a_43_0': 6}}
+PASSED
+test_plan.py::test_day[day10] PASSED
+test_plan.py::test_day[day2] PASSED
+test_plan.py::test_day[day3] PASSED
+test_plan.py::test_day[day4] PASSED
+test_plan.py::test_day[day5] PASSED
+test_plan.py::test_day[day6] PASSED
+test_plan.py::test_day[day7] PASSED
+test_plan.py::test_day[day8] PASSED
+test_plan.py::test_day[day9] PASSED
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_plan.py::test_controller_rules
+PASSED test_plan.py::test_sealed_days_found
+PASSED test_plan.py::test_day[day1]
+PASSED test_plan.py::test_day[day10]
+PASSED test_plan.py::test_day[day2]
+PASSED test_plan.py::test_day[day3]
+PASSED test_plan.py::test_day[day4]
+PASSED test_plan.py::test_day[day5]
+PASSED test_plan.py::test_day[day6]
+PASSED test_plan.py::test_day[day7]
+PASSED test_plan.py::test_day[day8]
+PASSED test_plan.py::test_day[day9]
+============================= 12 passed in 25.00s ==============================

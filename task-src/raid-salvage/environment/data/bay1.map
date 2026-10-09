@@ -1,0 +1,19 @@
+# Mapfile. Created by GNU ddrescue version 1.27
+# Command line: ddrescue -d -r3 /dev/sdb bay1.img bay1.map
+# Start time:   2026-10-01 09:14:02
+# Current time: 2026-10-01 09:41:55
+# Finished
+# current_pos  current_status  current_pass
+0x00EC8A00     +               3
+#      pos        size  status
+0x00000000  0x00104800  +
+0x00104800  0x00001600  -
+0x00105E00  0x00322200  +
+0x00428000  0x00000A00  -
+0x00428A00  0x0008CC00  +
+0x004B5600  0x00001000  -
+0x004B6600  0x0019D200  +
+0x00653800  0x00000A00  -
+0x00654200  0x00873800  +
+0x00EC7A00  0x00001000  -
+0x00EC8A00  0x00237600  +

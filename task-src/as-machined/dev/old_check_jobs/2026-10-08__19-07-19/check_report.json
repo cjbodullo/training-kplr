@@ -1,0 +1,55 @@
+{
+  "results": [
+    {
+      "checks": {
+        "behavior_in_task_description": {
+          "explanation": "instruction.md names the three exact output files (/app/models/MNF-0610.step, BRG-1140.step, LVR-2205.step), states one solid per file, units in mm, orientation/position free but not a mirror image, and every surface within 0.02 mm of the as-machined part including unmeasured features. The verifier gates (single valid solid, volume/xor tolerance, no-reflection rotations, 0.02 mm surface deviation) all correspond to behaviors the instruction describes. The volume/xor thresholds are tighter machine checks but are implied by 'exactly the way it came off the machine'.",
+          "outcome": "pass"
+        },
+        "behavior_in_tests": {
+          "explanation": "test_models.py parametrizes over all three parts and check_models.compare enforces each documented requirement: file exists, exactly one valid solid, matching volume, small symmetric difference, proper (non-mirror) rotation alignment, and surface deviation <= 0.02 mm. All three parts must pass, matching the instruction's all-or-nothing deliverable.",
+          "outcome": "pass"
+        },
+        "informative_test_structure": {
+          "explanation": "test_models.py is short and clear with one parametrized test per part. check_models.py has a module docstring summarizing the acceptance rule and per-function comments explaining each gate (rotations, boundary distance, xor). The logic is readable and maintainable.",
+          "outcome": "pass"
+        },
+        "anti_cheating_measures": {
+          "explanation": "The sealed truth solids live only in tests/truth and the verifier runs in a separate environment (environment_mode = separate); the agent's image copies only data/cnc, data/shop, data/qc — no truth, no solution, no tests. CMM reports carry measurement noise and nominals, not the answer, and the task requires genuine reconstruction (history rollback + forward machining model). The cheat/ folder documents that trivial submissions (envelopes, mirror, inch-scaled, two-solid) all score 0.",
+          "outcome": "pass"
+        },
+        "structured_data_schema": {
+          "explanation": "The expected output is a STEP geometry file rather than JSON/CSV/API data, but its acceptance 'schema' is explicitly documented in instruction.md: exactly one solid per file, units in mm, free orientation/position except no mirroring, and a 0.02 mm surface tolerance. No normative constraint is left only to examples.",
+          "outcome": "pass"
+        },
+        "pinned_dependencies": {
+          "explanation": "Pip packages are pinned: environment installs cadquery==2.8.0, and tests install pytest==9.1.1 and pytest-json-ctrf==0.5.2. Base apt packages (python3, libgl1, etc.) need not be pinned. Pinning is adequate.",
+          "outcome": "pass"
+        },
+        "typos": {
+          "explanation": "Paths are consistent across files: Dockerfile maps data/cnc->/app/cnc, data/shop->/app/shop, data/qc->/app/qc; instruction.md, solve.sh, task.toml artifacts, and test_models.py all agree on /app/models/<part>.step with the three part numbers. No typos found in filenames, paths, commands, or program numbers.",
+          "outcome": "pass"
+        },
+        "tests_or_solution_in_image": {
+          "explanation": "The environment Dockerfile copies only the data directories and creates /app/models; it does not copy solution/ or tests/. The tests image copies the tests directory into /tests separately for the verifier. Neither solution nor test truth is baked into the runtime (agent) image.",
+          "outcome": "pass"
+        },
+        "test_deps_in_image": {
+          "explanation": "pytest and pytest-json-ctrf are installed only in tests/Dockerfile, not in environment/Dockerfile. The environment image installs cadquery, which the agent legitimately needs to produce STEP solids. Test-only dependencies are isolated to the tests build.",
+          "outcome": "pass"
+        },
+        "hardcoded_solution": {
+          "explanation": "The reference solution computes the answer: history.py rolls the control backup back through OPRT-HIS.TXT, fanuc.py interprets the macro-B programs into tool moves, cut.py performs OCCT material removal, cmm.py virtually inspects and fits work-offset shifts against the CMM data, and models.py selects the reading that reproduces all measurements before exporting. It never echoes precomputed geometry.",
+          "outcome": "pass"
+        },
+        "file_reference_mentioned": {
+          "explanation": "instruction.md explicitly states the required output files: /app/models/MNF-0610.step, /app/models/BRG-1140.step, and /app/models/LVR-2205.step, which are exactly the paths the tests check and the task.toml artifacts list.",
+          "outcome": "pass"
+        }
+      },
+      "cost_usd": 1.1527760000000002,
+      "task_name": "",
+      "error": null
+    }
+  ]
+}

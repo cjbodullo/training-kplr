@@ -1,0 +1,3 @@
+read /tests/data_a.txt
+read /tests/data_b.txt
+read /tests/data_c.txt

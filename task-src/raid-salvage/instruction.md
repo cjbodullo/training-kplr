@@ -1,0 +1,11 @@
+our office nas died in the middle of a raid rebuild and i need the share back off it.
+
+box is a plain debian machine called tarn. four disks in one linux md raid5 built with mdadm, metadata 1.2, whole disks as members, ext4 sitting straight on md0. no lvm, no partitions. early september one disk fell out of the array. we did not notice for weeks so people kept using the share degraded until the end of the month, then i re added the disk and the rebuild kicked off. few hours in another disk started returning read errors and the array went down hard. nothing has written to any of the four disks since then, i made sure.
+
+i pulled all four and imaged them on another machine with GNU ddrescue 1.27. it is all in `/data/tarn`, `bay1` to `bay4`, one xz compressed image plus its ddrescue mapfile per bay. bay2 was getting worse every pass so i stopped that run before it finished. bay1 has a few bad spots too. anything ddrescue never read is zeros in the image. you will not get loop devices or the md driver in here so the array has to be put back together in userspace.
+
+what i want is the share exactly as it was at the moment it died, meaning what you would have seen if all four disks had been fine and the box had just come back up and mounted it by itself. every regular file you can get back byte for byte goes into `/app/out/recovered.tar`, path relative to the root of the filesystem, so `finance/2025/whatever.csv` and not some mount point. some files will not be fully recoverable from these four images. those go in `/app/out/lost.txt`, one absolute path per line as seen from the fs root, like `/finance/2025/whatever.csv`. each regular file on the share must be in exactly one of the two. a hard link is its own path and counts on its own. dirs, owners, perms and timestamps do not matter to me. just paths and bytes.
+
+here is what i care about most. a file only belongs in the tar if every byte of it is pinned down by what is on these images. something that opens fine and looks right but has a wrong block in it is worse than losing it, because nobody will ever notice. same goes the other way though. if the images do determine a file completely i want it back, not written off.
+
+You have 10800 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.

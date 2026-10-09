@@ -1,0 +1,14 @@
+Eclipse SUMO sumo Version 1.18.0
+half term (excluded): ['2026-10-26', '2026-10-27', '2026-10-28', '2026-10-29', '2026-10-30']
+J3: school road stop line and westbound nearside feeders are crossed, swapping back
+J2 westbound: stop lines 1486/h vs J3 outflow 1008/h
+J2: double counting loop ('J2', 'D3') halving
+days after the estate step change: ['2026-11-02', '2026-11-03', '2026-11-04', '2026-11-05', '2026-11-06'] (estate morning totals x1.44)
+bus gate: 474 cars a morning cut through in the phase 2 week
+J2 Orchard Way northbound (estate) offside (right): queued over its upstream loop, conservation estimate 612/h (stop line peak 418/h)
+estate saturation flow 1534/h of green
+released estate traffic eastbound 28/h
+J1 Fenwick Road northbound single lane: queued over its upstream loop, conservation estimate 233/h (stop line peak 331/h)
+flow ratios: {'J1': [0.326, 0.165], 'J2': [0.333, 0.399], 'J3': [0.462, 0.147], 'J4': [0.474, 0.154]}
+greens: {'J1': [60, 30, 9], 'J2': [41, 49, 9], 'J3': [68, 22, 9], 'J4': [71, 35]}
+wrote /app/am_peak.add.xml

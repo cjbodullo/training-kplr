@@ -1,0 +1,63 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 12 items
+
+test_plan.py::test_controller_rules PASSED
+test_plan.py::test_sealed_days_found PASSED
+test_plan.py::test_day[day1] day1 {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 4.4, 'block_back': {'a_43_1': 13}}
+day10 {'teleports': 0, 'loaded': 9247, 'arrived': 9247, 'depart_delay': 7.1, 'block_back': {'a_43_0': 16, 'a_43_1': 7}}
+day2 {'teleports': 0, 'loaded': 8921, 'arrived': 8921, 'depart_delay': 7.1, 'block_back': {}}
+day3 {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 56.9, 'block_back': {'a_43_1': 12, 'a_43_0': 5}}
+day4 {'teleports': 0, 'loaded': 9356, 'arrived': 9356, 'depart_delay': 324.2, 'block_back': {'a_43_1': 14, 'a_43_0': 3}}
+day5 {'teleports': 0, 'loaded': 9316, 'arrived': 9316, 'depart_delay': 55.1, 'block_back': {'a_43_1': 34}}
+day6 {'teleports': 0, 'loaded': 9506, 'arrived': 9506, 'depart_delay': 4.4, 'block_back': {'a_43_1': 1}}
+day7 {'teleports': 0, 'loaded': 9202, 'arrived': 9202, 'depart_delay': 193.9, 'block_back': {'a_43_1': 8, 'a_43_0': 23}}
+day8 {'teleports': 0, 'loaded': 9352, 'arrived': 9352, 'depart_delay': 5.0, 'block_back': {'a_43_1': 39, 'a_43_0': 23}}
+day9 {'teleports': 0, 'loaded': 9213, 'arrived': 9213, 'depart_delay': 10.5, 'block_back': {'a_43_0': 16}}
+PASSED
+test_plan.py::test_day[day10] PASSED
+test_plan.py::test_day[day2] PASSED
+test_plan.py::test_day[day3] PASSED
+test_plan.py::test_day[day4] FAILED
+test_plan.py::test_day[day5] PASSED
+test_plan.py::test_day[day6] PASSED
+test_plan.py::test_day[day7] PASSED
+test_plan.py::test_day[day8] PASSED
+test_plan.py::test_day[day9] PASSED
+
+=================================== FAILURES ===================================
+________________________________ test_day[day4] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9440, 'arrived': 9440, 'depart_delay': 4.4, ...}, 'day10': {'teleports': 0, 'loade..., 'depart_delay': 7.1, ...}, 'day3': {'teleports': 0, 'loaded': 9190, 'arrived': 9190, 'depart_delay': 56.9, ...}, ...}
+day = 'day4'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+        assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+>       assert m["depart_delay"] <= MAX_DEPART_DELAY, \
+            f"queue past the edge of the model: a vehicle waited {m['depart_delay']:.0f} s to enter"
+E       AssertionError: queue past the edge of the model: a vehicle waited 324 s to enter
+E       assert 324.2 <= 300.0
+
+test_plan.py:161: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_plan.py::test_controller_rules
+PASSED test_plan.py::test_sealed_days_found
+PASSED test_plan.py::test_day[day1]
+PASSED test_plan.py::test_day[day10]
+PASSED test_plan.py::test_day[day2]
+PASSED test_plan.py::test_day[day3]
+PASSED test_plan.py::test_day[day5]
+PASSED test_plan.py::test_day[day6]
+PASSED test_plan.py::test_day[day7]
+PASSED test_plan.py::test_day[day8]
+PASSED test_plan.py::test_day[day9]
+FAILED test_plan.py::test_day[day4] - AssertionError: queue past the edge of the model: a vehicle waited 324 s to enter
+assert 324.2 <= 300.0
+=================== 1 failed, 11 passed in 90.70s (0:01:30) ====================

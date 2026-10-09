@@ -1,0 +1,21 @@
+{
+  "vocab_size": 4096,
+  "d_model": 256,
+  "n_layers": 6,
+  "n_heads": 8,
+  "n_kv_heads": 2,
+  "head_dim": 32,
+  "d_ff": 704,
+  "rotary_dim": 16,
+  "rope_theta": 10000.0,
+  "rope_position_scale": 0.5,
+  "norm_eps": 1e-05,
+  "embedding_multiplier": 6.0,
+  "residual_multiplier": 0.35,
+  "attention_multiplier": 0.03125,
+  "logit_multiplier": 0.25,
+  "max_seq_len": 2048,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "rope_cache_dtype": "bfloat16"
+}

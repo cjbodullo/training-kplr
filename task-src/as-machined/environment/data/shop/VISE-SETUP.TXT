@@ -1,0 +1,11 @@
+VMC-3  FANUC 0i-MF  KURT DX6 VISE, CELL 2
+------------------------------------------------
+all numbers are in the work offset frame: machine X/Y, and for Z the value you would
+put in a work offset Z if you touched that surface off with the right H active.
+
+fixed jaw face ............ Y -208.000   (work sits in front of it, toward -Y)
+left stop face ............ X -612.000   (work sits to +X of it)
+parallels top ............. Z -455.000
+
+the stop is a low hard stop. it only touches the bottom 15 mm of the work.
+parts go in square to the jaw and the stop, seated down on the parallels.

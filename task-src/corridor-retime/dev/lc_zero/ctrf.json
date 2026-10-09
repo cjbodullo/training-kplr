@@ -1,0 +1,150 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-10-08T04:50:27.728520+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 12,
+            "passed": 1,
+            "failed": 11,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1791435027591,
+            "stop": 1791435027728
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_plan.py::test_controller_rules",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 12,
+                "start": 1791435027678,
+                "stop": 1791435027690,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "def test_controller_rules():\n>       _read_plan()\n\ntest_plan.py:148: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_plan.py::test_sealed_days_found",
+                "status": "passed",
+                "duration": 0,
+                "start": 1791435027690,
+                "stop": 1791435027690,
+                "retries": 0,
+                "file_path": "test_plan.py"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027690,
+                "stop": 1791435027694,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027694,
+                "stop": 1791435027698,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027698,
+                "stop": 1791435027702,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027702,
+                "stop": 1791435027706,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 3,
+                "start": 1791435027706,
+                "stop": 1791435027709,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027709,
+                "stop": 1791435027713,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027713,
+                "stop": 1791435027717,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 3,
+                "start": 1791435027717,
+                "stop": 1791435027720,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 3,
+                "start": 1791435027721,
+                "stop": 1791435027724,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            },
+            {
+                "name": "test_plan.py::test_day",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791435027724,
+                "stop": 1791435027728,
+                "retries": 0,
+                "file_path": "test_plan.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def results():\n>       plan = _read_plan()\n               ^^^^^^^^^^^^\n\ntest_plan.py:134: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_plan():\n>       assert os.path.isfile(AGENT), f\"{AGENT} missing\"\nE       AssertionError: /app/am_peak.add.xml missing\nE       assert False\nE        +  where False = <function isfile at 0x78402af8c220>('/app/am_peak.add.xml')\nE        +    where <function isfile at 0x78402af8c220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_plan.py:44: AssertionError"
+            }
+        ]
+    }
+}

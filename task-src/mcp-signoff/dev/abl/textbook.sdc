@@ -1,0 +1,6 @@
+set_multicycle_path 4 -setup -from [get_cells {s0_reg_* z1_reg_* z2_reg_* z3_reg_*}] -to [get_pins {z1_reg_*/D z2_reg_*/D z3_reg_*/D c3_reg_*/D}]
+set_multicycle_path 3 -hold -from [get_cells {s0_reg_* z1_reg_* z2_reg_* z3_reg_*}] -to [get_pins {z1_reg_*/D z2_reg_*/D z3_reg_*/D c3_reg_*/D}]
+set_multicycle_path 3 -setup -from [get_cells {opx_reg_* opg_reg_*}] -to [get_pins {prod_reg_*/D}]
+set_multicycle_path 2 -hold -from [get_cells {opx_reg_* opg_reg_*}] -to [get_pins {prod_reg_*/D}]
+set_multicycle_path 4 -setup -from [get_cells {tag_op_reg_*}] -to [get_pins {out_tag_reg_*/D}]
+set_multicycle_path 3 -hold -from [get_cells {tag_op_reg_*}] -to [get_pins {out_tag_reg_*/D}]

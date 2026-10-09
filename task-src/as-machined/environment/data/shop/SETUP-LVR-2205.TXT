@@ -1,0 +1,5 @@
+LVR-2205  LEVER               6061-T6      program O2205 (one op)
+
+stock: ground block 110.00 x 45.00 x 20.00 (X x Y x Z as loaded)
+  left end on stop, back face on fixed jaw, bottom on parallels.
+  G57

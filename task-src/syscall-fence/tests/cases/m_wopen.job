@@ -1,0 +1,2 @@
+read /tests/data_a.txt
+wopen /app/out/leak1

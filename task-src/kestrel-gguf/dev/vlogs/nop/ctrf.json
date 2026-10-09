@@ -1,0 +1,260 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-10-08T10:56:05.773636+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 23,
+            "passed": 1,
+            "failed": 22,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1791456963303,
+            "stop": 1791456965773
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_port.py::test_sealed_prompts_present",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791456965605,
+                "stop": 1791456965606,
+                "retries": 0,
+                "file_path": "test_port.py"
+            },
+            {
+                "name": "test_port.py::test_gguf_tensors_are_f32",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 28,
+                "start": 1791456965607,
+                "stop": 1791456965635,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "def test_gguf_tensors_are_f32():\n>       r = gguf.GGUFReader(ART)\n            ^^^^^^^^^^^^^^^^^^^^\n\ntest_port.py:78: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/opt/llama.cpp/gguf-py/gguf/gguf_reader.py:138: in __init__\n    self.data = np.memmap(path, mode = mode)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nsubtype = <class 'numpy.memmap'>, filename = '/app/kestrel.gguf'\ndtype = <class 'numpy.uint8'>, mode = 'r', offset = 0, shape = None, order = 'C'\n\n    def __new__(subtype, filename, dtype=uint8, mode='r+', offset=0,\n                shape=None, order='C'):\n        # Import here to minimize 'import numpy' overhead\n        import mmap\n        import os.path\n        try:\n            mode = mode_equivalents[mode]\n        except KeyError as e:\n            if mode not in valid_filemodes:\n                raise ValueError(\n                    \"mode must be one of {!r} (got {!r})\"\n                    .format(valid_filemodes + list(mode_equivalents.keys()), mode)\n                ) from None\n    \n        if mode == 'w+' and shape is None:\n            raise ValueError(\"shape must be given if mode == 'w+'\")\n    \n        if hasattr(filename, 'read'):\n            f_ctx = nullcontext(filename)\n        else:\n>           f_ctx = open(\n                os.fspath(filename),\n                ('r' if mode == 'c' else mode)+'b'\n            )\nE           FileNotFoundError: [Errno 2] No such file or directory: '/app/kestrel.gguf'\n\n/usr/local/lib/python3.12/site-packages/numpy/_core/memmap.py:234: FileNotFoundError",
+                "message": "The test failed in the call phase"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965636,
+                "stop": 1791456965642,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 5,
+                "start": 1791456965642,
+                "stop": 1791456965647,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965647,
+                "stop": 1791456965653,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 5,
+                "start": 1791456965653,
+                "stop": 1791456965658,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965658,
+                "stop": 1791456965664,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 7,
+                "start": 1791456965664,
+                "stop": 1791456965671,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965671,
+                "stop": 1791456965677,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 10,
+                "start": 1791456965678,
+                "stop": 1791456965688,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 7,
+                "start": 1791456965689,
+                "stop": 1791456965696,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965697,
+                "stop": 1791456965703,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965704,
+                "stop": 1791456965710,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 5,
+                "start": 1791456965711,
+                "stop": 1791456965716,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 8,
+                "start": 1791456965717,
+                "stop": 1791456965725,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965725,
+                "stop": 1791456965731,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965731,
+                "stop": 1791456965737,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965737,
+                "stop": 1791456965743,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 4,
+                "start": 1791456965744,
+                "stop": 1791456965748,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965749,
+                "stop": 1791456965755,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 6,
+                "start": 1791456965755,
+                "stop": 1791456965761,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 5,
+                "start": 1791456965761,
+                "stop": 1791456965766,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "duration": 5,
+                "start": 1791456965767,
+                "stop": 1791456965772,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "trace": "@pytest.fixture(scope=\"session\")\n    def work():\n>       assert os.path.isfile(ART), f\"{ART} missing\"\nE       AssertionError: /app/kestrel.gguf missing\nE       assert False\nE        +  where False = <function isfile at 0x7cc292ca02c0>('/app/kestrel.gguf')\nE        +    where <function isfile at 0x7cc292ca02c0> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntest_port.py:33: AssertionError"
+            }
+        ]
+    }
+}

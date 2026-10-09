@@ -1,0 +1,12 @@
+Eclipse SUMO sumo Version 1.18.0
+half term (excluded): ['2026-10-26', '2026-10-27', '2026-10-28', '2026-10-29', '2026-10-30']
+J3: school road stop line and westbound nearside feeders are crossed, swapping back
+J2 westbound: stop lines 1486/h vs J3 outflow 1009/h
+J2: double counting loop ('J2', 'D3') halving
+days after the estate step change: ['2026-11-02', '2026-11-03', '2026-11-04', '2026-11-05', '2026-11-06'] (estate morning totals x1.79)
+J2 Orchard Way northbound (estate) offside (right): queued over its upstream loop, conservation estimate 602/h (stop line peak 454/h)
+estate saturation flow 1666/h of green
+released estate traffic eastbound 148/h
+flow ratios: {'J1': [0.327, 0.167], 'J2': [0.337, 0.361], 'J3': [0.485, 0.148], 'J4': [0.496, 0.155]}
+greens: {'J1': [60, 30, 9], 'J2': [43, 47, 9], 'J3': [69, 21, 9], 'J4': [72, 34]}
+wrote /app/am_peak.add.xml

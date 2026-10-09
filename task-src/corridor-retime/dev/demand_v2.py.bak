@@ -1,0 +1,106 @@
+"""true demand model: od matrix x time profile, sampled per day into a sumo route file."""
+import math
+import random
+
+ENTRIES = ["a_w_in", "a_e_in", "j1n_in", "j1s_in", "j2s_in", "j3n_in", "j4n_in", "j4s_in"]
+EXITS = ["a_w_out", "a_e_out", "j1n_out", "j1s_out", "j2s_out", "j3n_out", "j4n_out", "j4s_out"]
+ARM_OF = {"a_w_in": "w", "a_w_out": "w", "a_e_in": "e", "a_e_out": "e"}
+for e in ENTRIES + EXITS:
+    ARM_OF.setdefault(e, e.split("_")[0])
+
+# commuter od, veh/h at profile 1.0 (term time). town centre is east of J4.
+OD = {
+    "a_w_in": {"a_e_out": 680, "j1n_out": 150, "j4n_out": 140},
+    "a_e_in": {"a_w_out": 680, "j1s_out": 60, "j2s_out": 120, "j4s_out": 80},
+    "j1n_in": {"a_e_out": 220, "a_w_out": 50, "j1s_out": 30},
+    "j1s_in": {"a_e_out": 150, "a_w_out": 60, "j1n_out": 30},
+    "j2s_in": {"a_e_out": 480, "j4n_out": 50, "a_w_out": 175, "j1s_out": 30},
+    "j3n_in": {"a_e_out": 20, "a_w_out": 20},
+    "j4n_in": {"a_e_out": 150, "a_w_out": 70, "j4s_out": 40},
+    "j4s_in": {"a_e_out": 190, "a_w_out": 70, "j4n_out": 40},
+}
+# school run (term time only, a fraction persists in half term: siblings at other schools, staff)
+SCHOOL_IN = {"a_w_in": 230}            # into the school road (j3n_out)
+SCHOOL_OUT = {"a_e_out": 120, "a_w_out": 130}         # back out of the school road
+SCALE = 0.92
+HALF_TERM_SCHOOL = 0.18
+HALF_TERM_COMMUTE = 0.86
+
+
+def commute_profile(t):
+    """multiplier at seconds after midnight, peak 08:00-08:45."""
+    h = t / 3600.0
+    pts = [(6.75, 0.35), (7.0, 0.45), (7.25, 0.62), (7.5, 0.80), (7.75, 0.93), (8.0, 1.0),
+           (8.5, 1.0), (8.75, 0.92), (9.0, 0.74), (9.25, 0.58), (9.5, 0.48), (9.75, 0.42), (10.25, 0.38)]
+    return _interp(pts, h)
+
+
+def school_in_profile(t):
+    h = t / 3600.0
+    pts = [(6.75, 0.0), (7.75, 0.05), (8.1, 0.45), (8.35, 1.0), (8.6, 1.0), (8.85, 0.25), (9.1, 0.04), (10.25, 0.0)]
+    return _interp(pts, h)
+
+
+def school_out_profile(t):
+    return school_in_profile(t - 240)    # parents leave about four minutes after arriving
+
+
+def _interp(pts, h):
+    if h <= pts[0][0]:
+        return pts[0][1]
+    for (h0, v0), (h1, v1) in zip(pts, pts[1:]):
+        if h <= h1:
+            return v0 + (v1 - v0) * (h - h0) / (h1 - h0)
+    return pts[-1][1]
+
+
+def streams(term=True):
+    """list of (entry, exit, rate_vph_at_1, profile_fn)."""
+    out = []
+    cm = SCALE * (1.0 if term else HALF_TERM_COMMUTE)
+    sm = 1.0 if term else HALF_TERM_SCHOOL
+    for a, row in OD.items():
+        for b, v in row.items():
+            out.append((a, b, v * cm, commute_profile))
+    for a, v in SCHOOL_IN.items():
+        out.append((a, "j3n_out", v * sm, school_in_profile))
+    for b, v in SCHOOL_OUT.items():
+        out.append(("j3n_in", b, v * sm, school_out_profile))
+    return out
+
+
+def sample_day(rng, term=True, t0=6.75 * 3600, t1=9.75 * 3600, day_scale=None, od_noise=0.05):
+    """poisson vehicles for one day. returns sorted list of (depart_s, entry, exit)."""
+    if day_scale is None:
+        day_scale = math.exp(rng.gauss(0, 0.03))
+    vehs = []
+    for a, b, v, prof in streams(term):
+        k = v * day_scale * math.exp(rng.gauss(0, od_noise))
+        # thinning on a 1 s grid
+        lam_max = k / 3600.0 * 1.0001
+        t = t0
+        while True:
+            t += rng.expovariate(lam_max) if lam_max > 0 else 1e9
+            if t >= t1:
+                break
+            if rng.random() < prof(t) * k / 3600.0 / lam_max:
+                vehs.append((t, a, b))
+    vehs.sort()
+    return vehs
+
+
+def write_routes(path, net, vehs, prefix="v"):
+    """route file with explicit edge lists (shortest path in the corridor)."""
+    cache = {}
+    with open(path, "w") as f:
+        f.write('<routes>\n    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="4.6" minGap="2.5" maxSpeed="16.0" speedDev="0.1"/>\n')
+        for i, (t, a, b) in enumerate(vehs):
+            key = (a, b)
+            if key not in cache:
+                path_edges, _ = net.getShortestPath(net.getEdge(a), net.getEdge(b))
+                if path_edges is None:
+                    raise ValueError(f"no path {a}->{b}")
+                cache[key] = " ".join(e.getID() for e in path_edges)
+            f.write(f'    <vehicle id="{prefix}{i}" type="car" depart="{t:.1f}" departLane="best" departSpeed="max">'
+                    f'<route edges="{cache[key]}"/></vehicle>\n')
+        f.write("</routes>\n")

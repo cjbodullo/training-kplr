@@ -1,0 +1,323 @@
+{
+    "reportFormat": "CTRF",
+    "specVersion": "0.0.0",
+    "timestamp": "2026-10-08T11:20:01.019180+00:00",
+    "generatedBy": "pytest",
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "9.1.1"
+        },
+        "summary": {
+            "tests": 23,
+            "passed": 15,
+            "failed": 8,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1791458361221,
+            "stop": 1791458401018
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_port.py::test_sealed_prompts_present",
+                "status": "passed",
+                "duration": 1,
+                "start": 1791458363503,
+                "stop": 1791458363504,
+                "retries": 0,
+                "file_path": "test_port.py"
+            },
+            {
+                "name": "test_port.py::test_gguf_tensors_are_f32",
+                "status": "passed",
+                "duration": 358,
+                "start": 1791458363505,
+                "stop": 1791458363863,
+                "retries": 0,
+                "file_path": "test_port.py"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 5093,
+                "start": 1791458363864,
+                "stop": 1791458368957,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 941,
+                "start": 1791458368958,
+                "stop": 1791458369899,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/cpp_src.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 995 tokens, tokenizer.json gives 1000; first difference at 529\nE       assert [1, 312, 296,...735, 328, ...] == [1, 312, 296,...735, 328, ...]\nE         \nE         At index 529 diff: 326 != 223\nE         Right contains 5 more items, first extra item: 980\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (1015 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 53,
+                "start": 1791458369900,
+                "stop": 1791458369953,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/crime_max.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n>       ids, logits = run_dumper(work, prompt)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^\n\ntest_port.py:88: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nwork = '/tmp/kestrel-grade-eq3irgka'\nprompt_path = '/tests/prompts/crime_max.txt'\n\n    def run_dumper(work, prompt_path):\n        name = os.path.basename(prompt_path)\n        txt = os.path.join(work, name)\n        shutil.copyfile(prompt_path, txt)\n        os.chmod(txt, 0o644)\n        out = os.path.join(work, name + \".bin\")\n        # the gguf is untrusted input to libllama: parse it as nobody\n        cmd = [\"setpriv\", \"--reuid=65534\", \"--regid=65534\", \"--clear-groups\",\n               DUMPER, os.path.join(work, \"model.gguf\"), txt, out]\n        p = subprocess.run(cmd, capture_output=True, text=True, timeout=300, cwd=work)\n>       assert p.returncode == 0, f\"kestrel-logits failed ({p.returncode}): {p.stderr[-2000:]}\"\nE       AssertionError: kestrel-logits failed (4): ....................................\nE         prompt has 2074 tokens, need 1..2048\nE         \nE       assert 4 == 0\nE        +  where 4 = CompletedProcess(args=['setpriv', '--reuid=65534', '--regid=65534', '--clear-groups', '/usr/local/bin/kestrel-logits', '/tmp/kestrel-grade-eq3irgka/model.gguf', '/tmp/kestrel-grade-eq3irgka/crime_max.txt', '/tmp/kestrel-grade-eq3irgka/crime_max.txt.bin'], returncode=4, stdout='', stderr='....................................\\nprompt has 2074 tokens, need 1..2048\\n').returncode\n\ntest_port.py:63: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 2724,
+                "start": 1791458369953,
+                "stop": 1791458372677,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 5426,
+                "start": 1791458372677,
+                "stop": 1791458378103,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 2443,
+                "start": 1791458378103,
+                "stop": 1791458380546,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/dracula.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 1923 tokens, tokenizer.json gives 1900; first difference at 158\nE       assert [1, 359, 539,...62, 1174, ...] == [1, 359, 539,...62, 1174, ...]\nE         \nE         At index 158 diff: 350 != 401\nE         Left contains 23 more items, first extra item: 1291\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (1984 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 193,
+                "start": 1791458380546,
+                "stop": 1791458380739,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 134,
+                "start": 1791458380739,
+                "stop": 1791458380873,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 83,
+                "start": 1791458380874,
+                "stop": 1791458380957,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 1559,
+                "start": 1791458380957,
+                "stop": 1791458382516,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1318,
+                "start": 1791458382516,
+                "stop": 1791458383834,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/markdown.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 1105 tokens, tokenizer.json gives 1100; first difference at 25\nE       assert [1, 5, 295, 4...2669, 16, ...] == [1, 5, 295, 4...2669, 16, ...]\nE         \nE         At index 25 diff: 16 != 2949\nE         Left contains 5 more items, first extra item: 20\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (1125 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 4196,
+                "start": 1791458383834,
+                "stop": 1791458388030,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 356,
+                "start": 1791458388030,
+                "stop": 1791458388386,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1548,
+                "start": 1791458388386,
+                "stop": 1791458389934,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/python_src.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 1499 tokens, tokenizer.json gives 1498; first difference at 221\nE       assert [1, 913, 770,... 37, 278, ...] == [1, 913, 770,... 37, 278, ...]\nE         \nE         At index 221 diff: 15 != 1266\nE         Left contains one more item: 1073\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (1506 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 3577,
+                "start": 1791458389934,
+                "stop": 1791458393511,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 1005,
+                "start": 1791458393512,
+                "stop": 1791458394517,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 1916,
+                "start": 1791458394517,
+                "stop": 1791458396433,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "passed",
+                "duration": 1842,
+                "start": 1791458396433,
+                "stop": 1791458398275,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ]
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1669,
+                "start": 1791458398276,
+                "stop": 1791458399945,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/ulysses.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 1504 tokens, tokenizer.json gives 1500; first difference at 323\nE       assert [1, 86, 330, ...413, 201, ...] == [1, 86, 330, ...413, 201, ...]\nE         \nE         At index 323 diff: 350 != 401\nE         Left contains 4 more items, first extra item: 1670\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (1516 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 387,
+                "start": 1791458399946,
+                "stop": 1791458400333,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/wallpaper.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 405 tokens, tokenizer.json gives 400; first difference at 12\nE       assert [1, 300, 811,...04, 1377, ...] == [1, 300, 811,...04, 1377, ...]\nE         \nE         At index 12 diff: 350 != 755\nE         Left contains 5 more items, first extra item: 599\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (420 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_port.py::test_prompt",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 684,
+                "start": 1791458400334,
+                "stop": 1791458401018,
+                "retries": 0,
+                "file_path": "test_port.py",
+                "tags": [
+                    "parametrize::prompt::['/tests/prompts/access_log.txt', '/tests/prompts/cpp_src.txt', '/tests/prompts/crime_max.txt', '/tests/prompts/csv_table.txt', '/tests/prompts/digit_run.txt', '/tests/prompts/dracula.txt', '/tests/prompts/emoji_only.txt', '/tests/prompts/empty.txt', '/tests/prompts/hello.txt', '/tests/prompts/json_blob.txt', '/tests/prompts/markdown.txt', '/tests/prompts/mixed_scripts.txt', '/tests/prompts/one_digit.txt', '/tests/prompts/python_src.txt', '/tests/prompts/quijote.txt', '/tests/prompts/sanguo.txt', '/tests/prompts/shouting.txt', '/tests/prompts/trial.txt', '/tests/prompts/ulysses.txt', '/tests/prompts/wallpaper.txt', '/tests/prompts/whitespace.txt']::ids_['access_log', 'cpp_src', 'crime_max', 'csv_table', 'digit_run', 'dracula', 'emoji_only', 'empty', 'hello', 'json_blob', 'markdown', 'mixed_scripts', 'one_digit', 'python_src', 'quijote', 'sanguo', 'shouting', 'trial', 'ulysses', 'wallpaper', 'whitespace']"
+                ],
+                "trace": "prompt = '/tests/prompts/whitespace.txt', work = '/tmp/kestrel-grade-eq3irgka'\nref_model = Kestrel(\n  (embed): Embedding(4096, 256)\n  (blocks): ModuleList(\n    (0-5): 6 x Block(\n      (ln_attn): LayerNorm((256...s=704, out_features=256, bias=True)\n      )\n    )\n  )\n  (ln_f): LayerNorm((256,), eps=1e-05, elementwise_affine=True)\n)\nhf_tok = Tokenizer(version=\"1.0\", truncation=None, padding=None, added_tokens=[{\"id\":0, \"content\":\"<|pad|>\", \"single_word\":Fals...\"a\", \"y\"), (\"\u00e2\u0122\", \"\u013b\"), (\"a\", \"d\"), (\"i\", \"l\"), (\"\u0120a\", \"s\"), (\"r\", \"i\"), (\"\u0120w\", \"ith\"), (\"c\", \"t\"), (\"\u0120\", \"le\"), ...]))\n\n    @pytest.mark.parametrize(\"prompt\", PROMPTS, ids=[os.path.basename(p)[:-4] for p in PROMPTS])\n    def test_prompt(prompt, work, ref_model, hf_tok):\n        text = open(prompt, encoding=\"utf-8\", newline=\"\").read()\n        want = hf_tok.encode(text).ids\n        ids, logits = run_dumper(work, prompt)\n        first = next((i for i, (a, b) in enumerate(zip(ids.tolist(), want)) if a != b), min(len(ids), len(want)))\n>       assert ids.tolist() == want, (\n            f\"token ids differ: llama.cpp gave {len(ids)} tokens, tokenizer.json gives {len(want)}; first difference at {first}\")\nE       AssertionError: token ids differ: llama.cpp gave 649 tokens, tokenizer.json gives 668; first difference at 14\nE       assert [1, 980, 1162...321, 326, ...] == [1, 980, 1162...321, 326, ...]\nE         \nE         At index 14 diff: 204 != 259\nE         Right contains 19 more items, first extra item: 67\nE         \nE         Full diff:\nE           [\nE               1,...\nE         \nE         ...Full output truncated (859 lines hidden), use '-vv' to show\n\ntest_port.py:90: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

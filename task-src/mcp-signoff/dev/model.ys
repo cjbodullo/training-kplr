@@ -1,0 +1,18 @@
+read_liberty -ignore_miss_func sky130hd_tt.lib
+read_verilog netlist.v
+hierarchy -top cicd
+cd cicd
+expose w:agc w:armed w:busy w:c3 w:ce_d1 w:ce_d2 w:ce_d3 w:ce_dec w:cnt w:dump w:en w:gain_q w:gain_sh w:gcoarse w:gfine w:i1 w:i2 w:i3 w:idx w:last w:level w:n2 w:n3 w:n4 w:opg w:opx w:opx_mag w:opx_q w:out_data w:out_tag w:out_valid w:ovr w:pend w:ph w:pk w:prdata w:prod w:r_act w:r_sh w:s0 w:shift_act w:shift_sh w:start w:tag_op w:tmode w:vld w:wd w:z1 w:z2 w:z3 w:zop
+cd
+flatten
+opt_clean
+async2sync
+dffunmap
+opt_clean
+techmap
+opt_expr
+opt_clean
+dffunmap
+aigmap
+opt_clean
+write_aiger -ascii -map model.map -zinit model.aag

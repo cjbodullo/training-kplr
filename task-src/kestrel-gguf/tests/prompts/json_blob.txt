@@ -1,0 +1,63 @@
+{
+  "id": "a7f3",
+  "items": [
+    {
+      "name": "Ünïcode",
+      "price": 280.8094,
+      "tags": [
+        "x",
+        "y"
+      ],
+      "ok": false,
+      "n": -167543
+    },
+    {
+      "name": "plain",
+      "price": 700.6556,
+      "tags": [],
+      "ok": true,
+      "n": -13703
+    },
+    {
+      "name": "Smörgåsbord",
+      "price": 323.0257,
+      "tags": [],
+      "ok": false,
+      "n": -239453
+    },
+    {
+      "name": "Ünïcode",
+      "price": 27.3109,
+      "tags": [],
+      "ok": false,
+      "n": 98350
+    },
+    {
+      "name": "Ünïcode",
+      "price": 391.626,
+      "tags": [],
+      "ok": false,
+      "n": -922066
+    },
+    {
+      "name": "naïve café",
+      "price": 666.1224,
+      "tags": [
+        "x",
+        "y",
+        "x",
+        "y"
+      ],
+      "ok": true,
+      "n": -366778
+    },
+    {
+      "name": "Smörgåsbord",
+      "price": 336.7389,
+      "tags": [],
+      "ok": true,
+      "n": 993878
+    },
+    {
+      "name": "plain",
+      "price": 296.2555,

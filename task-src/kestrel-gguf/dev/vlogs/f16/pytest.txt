@@ -1,0 +1,67 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 23 items
+
+test_port.py::test_sealed_prompts_present PASSED                         [  4%]
+test_port.py::test_gguf_tensors_are_f32 FAILED                           [  8%]
+test_port.py::test_prompt[access_log] PASSED                             [ 13%]
+test_port.py::test_prompt[cpp_src] PASSED                                [ 17%]
+test_port.py::test_prompt[crime_max] PASSED                              [ 21%]
+test_port.py::test_prompt[csv_table] PASSED                              [ 26%]
+test_port.py::test_prompt[digit_run] PASSED                              [ 30%]
+test_port.py::test_prompt[dracula] PASSED                                [ 34%]
+test_port.py::test_prompt[emoji_only] PASSED                             [ 39%]
+test_port.py::test_prompt[empty] PASSED                                  [ 43%]
+test_port.py::test_prompt[hello] PASSED                                  [ 47%]
+test_port.py::test_prompt[json_blob] PASSED                              [ 52%]
+test_port.py::test_prompt[markdown] PASSED                               [ 56%]
+test_port.py::test_prompt[mixed_scripts] PASSED                          [ 60%]
+test_port.py::test_prompt[one_digit] PASSED                              [ 65%]
+test_port.py::test_prompt[python_src] PASSED                             [ 69%]
+test_port.py::test_prompt[quijote] PASSED                                [ 73%]
+test_port.py::test_prompt[sanguo] PASSED                                 [ 78%]
+test_port.py::test_prompt[shouting] PASSED                               [ 82%]
+test_port.py::test_prompt[trial] PASSED                                  [ 86%]
+test_port.py::test_prompt[ulysses] PASSED                                [ 91%]
+test_port.py::test_prompt[wallpaper] PASSED                              [ 95%]
+test_port.py::test_prompt[whitespace] PASSED                             [100%]
+
+=================================== FAILURES ===================================
+__________________________ test_gguf_tensors_are_f32 ___________________________
+
+    def test_gguf_tensors_are_f32():
+        r = gguf.GGUFReader(ART)
+        bad = [t.name for t in r.tensors if t.tensor_type != gguf.GGMLQuantizationType.F32]
+>       assert not bad, f"non f32 tensors: {bad[:10]}"
+E       AssertionError: non f32 tensors: ['token_embd.weight', 'output.weight', 'blk.0.attn_q.weight', 'blk.0.attn_k.weight', 'blk.0.attn_v.weight', 'blk.0.attn_output.weight', 'blk.0.ffn_up.weight', 'blk.0.ffn_gate.weight', 'blk.0.ffn_down.weight', 'blk.1.attn_q.weight']
+E       assert not ['token_embd.weight', 'output.weight', 'blk.0.attn_q.weight', 'blk.0.attn_k.weight', 'blk.0.attn_v.weight', 'blk.0.attn_output.weight', ...]
+
+test_port.py:80: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_port.py::test_sealed_prompts_present
+PASSED test_port.py::test_prompt[access_log]
+PASSED test_port.py::test_prompt[cpp_src]
+PASSED test_port.py::test_prompt[crime_max]
+PASSED test_port.py::test_prompt[csv_table]
+PASSED test_port.py::test_prompt[digit_run]
+PASSED test_port.py::test_prompt[dracula]
+PASSED test_port.py::test_prompt[emoji_only]
+PASSED test_port.py::test_prompt[empty]
+PASSED test_port.py::test_prompt[hello]
+PASSED test_port.py::test_prompt[json_blob]
+PASSED test_port.py::test_prompt[markdown]
+PASSED test_port.py::test_prompt[mixed_scripts]
+PASSED test_port.py::test_prompt[one_digit]
+PASSED test_port.py::test_prompt[python_src]
+PASSED test_port.py::test_prompt[quijote]
+PASSED test_port.py::test_prompt[sanguo]
+PASSED test_port.py::test_prompt[shouting]
+PASSED test_port.py::test_prompt[trial]
+PASSED test_port.py::test_prompt[ulysses]
+PASSED test_port.py::test_prompt[wallpaper]
+PASSED test_port.py::test_prompt[whitespace]
+FAILED test_port.py::test_gguf_tensors_are_f32 - AssertionError: non f32 tens...
+======================== 1 failed, 22 passed in 40.76s =========================

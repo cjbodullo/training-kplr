@@ -1,0 +1,287 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 12 items
+
+test_plan.py::test_controller_rules FAILED
+test_plan.py::test_sealed_days_found PASSED
+test_plan.py::test_day[day1] ERROR
+test_plan.py::test_day[day10] ERROR
+test_plan.py::test_day[day2] ERROR
+test_plan.py::test_day[day3] ERROR
+test_plan.py::test_day[day4] ERROR
+test_plan.py::test_day[day5] ERROR
+test_plan.py::test_day[day6] ERROR
+test_plan.py::test_day[day7] ERROR
+test_plan.py::test_day[day8] ERROR
+test_plan.py::test_day[day9] ERROR
+
+==================================== ERRORS ====================================
+_______________________ ERROR at setup of test_day[day1] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+______________________ ERROR at setup of test_day[day10] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day2] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day3] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day4] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day5] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day6] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day7] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day8] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+_______________________ ERROR at setup of test_day[day9] _______________________
+
+    @pytest.fixture(scope="session")
+    def results():
+>       plan = _read_plan()
+               ^^^^^^^^^^^^
+
+test_plan.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+=================================== FAILURES ===================================
+____________________________ test_controller_rules _____________________________
+
+    def test_controller_rules():
+>       _read_plan()
+
+test_plan.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_plan():
+>       assert os.path.isfile(AGENT), f"{AGENT} missing"
+E       AssertionError: /app/am_peak.add.xml missing
+E       assert False
+E        +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+E        +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+test_plan.py:44: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_plan.py::test_sealed_days_found
+ERROR test_plan.py::test_day[day1] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day10] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day2] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day3] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day4] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day5] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day6] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day7] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day8] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+ERROR test_plan.py::test_day[day9] - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+FAILED test_plan.py::test_controller_rules - AssertionError: /app/am_peak.add.xml missing
+assert False
+ +  where False = <function isfile at 0x72c51bf30220>('/app/am_peak.add.xml')
+ +    where <function isfile at 0x72c51bf30220> = <module 'posixpath' (frozen)>.isfile
+ +      where <module 'posixpath' (frozen)> = os.path
+==================== 1 failed, 1 passed, 10 errors in 0.06s ====================

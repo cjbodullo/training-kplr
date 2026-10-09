@@ -1,0 +1,205 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /usr/bin/python3
+rootdir: /tests
+plugins: json-ctrf-0.5.2
+collecting ... collected 12 items
+
+test_plan.py::test_controller_rules PASSED
+test_plan.py::test_sealed_days_found PASSED
+test_plan.py::test_day[day1] day1 {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, 'block_back': {'a_34_0': 4911, 'a_34_1': 4933, 'a_43_0': 4322, 'a_23_1': 1607, 'a_43_1': 4464, 'a_12_1': 2382, 'a_12_0': 802, 'a_23_0': 121}}
+day10 {'teleports': 0, 'loaded': 9238, 'arrived': 7029, 'depart_delay': 9187.4, 'block_back': {'a_34_0': 4904, 'a_34_1': 4894, 'a_43_0': 4273, 'a_43_1': 4491, 'a_23_1': 1561, 'a_23_0': 219, 'a_12_1': 2216, 'a_12_0': 673}}
+day2 {'teleports': 0, 'loaded': 8576, 'arrived': 6755, 'depart_delay': 8714.5, 'block_back': {'a_34_1': 4935, 'a_34_0': 4912, 'a_43_0': 3552, 'a_23_1': 1498, 'a_43_1': 3569, 'a_23_0': 176, 'a_12_0': 622, 'a_12_1': 2219}}
+day3 {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, 'block_back': {'a_43_0': 3923, 'a_34_1': 4942, 'a_34_0': 4899, 'a_43_1': 4075, 'a_23_1': 1481, 'a_23_0': 169, 'a_12_1': 2165, 'a_12_0': 583}}
+day4 {'teleports': 0, 'loaded': 9109, 'arrived': 6963, 'depart_delay': 8280.5, 'block_back': {'a_34_0': 4840, 'a_34_1': 4852, 'a_43_0': 4196, 'a_43_1': 4318, 'a_23_1': 1626, 'a_12_1': 2282, 'a_23_0': 69, 'a_12_0': 575}}
+day5 {'teleports': 0, 'loaded': 9052, 'arrived': 6929, 'depart_delay': 8903.4, 'block_back': {'a_34_0': 4905, 'a_34_1': 4886, 'a_43_0': 4292, 'a_43_1': 4461, 'a_23_1': 1616, 'a_23_0': 114, 'a_12_1': 2331, 'a_12_0': 586}}
+day6 {'teleports': 0, 'loaded': 9293, 'arrived': 6972, 'depart_delay': 8927.1, 'block_back': {'a_34_1': 4860, 'a_34_0': 4886, 'a_43_0': 4448, 'a_43_1': 4626, 'a_23_0': 175, 'a_23_1': 1751, 'a_12_1': 2326, 'a_12_0': 717}}
+day7 {'teleports': 0, 'loaded': 8815, 'arrived': 6788, 'depart_delay': 8455.8, 'block_back': {'a_34_1': 4897, 'a_34_0': 4882, 'a_43_0': 3930, 'a_43_1': 4036, 'a_23_1': 1754, 'a_23_0': 133, 'a_12_1': 2473, 'a_12_0': 675}}
+day8 {'teleports': 0, 'loaded': 8972, 'arrived': 6974, 'depart_delay': 8459.9, 'block_back': {'a_34_1': 4868, 'a_34_0': 4868, 'a_43_0': 4256, 'a_43_1': 4475, 'a_23_1': 1629, 'a_12_0': 617, 'a_12_1': 2220, 'a_23_0': 140}}
+day9 {'teleports': 0, 'loaded': 9099, 'arrived': 7058, 'depart_delay': 8861.8, 'block_back': {'a_43_1': 4711, 'a_34_0': 4854, 'a_34_1': 4870, 'a_43_0': 4612, 'a_23_1': 1685, 'a_23_0': 141, 'a_12_0': 506, 'a_12_1': 2246}}
+FAILED
+test_plan.py::test_day[day10] FAILED
+test_plan.py::test_day[day2] FAILED
+test_plan.py::test_day[day3] FAILED
+test_plan.py::test_day[day4] FAILED
+test_plan.py::test_day[day5] FAILED
+test_plan.py::test_day[day6] FAILED
+test_plan.py::test_day[day7] FAILED
+test_plan.py::test_day[day8] FAILED
+test_plan.py::test_day[day9] FAILED
+
+=================================== FAILURES ===================================
+________________________________ test_day[day1] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day1'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 7066 of 9326 vehicles got through by 11:00
+E       assert 7066 == 9326
+
+test_plan.py:160: AssertionError
+_______________________________ test_day[day10] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day10'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 7029 of 9238 vehicles got through by 11:00
+E       assert 7029 == 9238
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day2] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day2'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6755 of 8576 vehicles got through by 11:00
+E       assert 6755 == 8576
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day3] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day3'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6843 of 8800 vehicles got through by 11:00
+E       assert 6843 == 8800
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day4] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day4'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6963 of 9109 vehicles got through by 11:00
+E       assert 6963 == 9109
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day5] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day5'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6929 of 9052 vehicles got through by 11:00
+E       assert 6929 == 9052
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day6] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day6'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6972 of 9293 vehicles got through by 11:00
+E       assert 6972 == 9293
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day7] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day7'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6788 of 8815 vehicles got through by 11:00
+E       assert 6788 == 8815
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day8] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day8'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 6974 of 8972 vehicles got through by 11:00
+E       assert 6974 == 8972
+
+test_plan.py:160: AssertionError
+________________________________ test_day[day9] ________________________________
+
+results = {'day1': {'teleports': 0, 'loaded': 9326, 'arrived': 7066, 'depart_delay': 8304.1, ...}, 'day10': {'teleports': 0, 'lo...part_delay': 8714.5, ...}, 'day3': {'teleports': 0, 'loaded': 8800, 'arrived': 6843, 'depart_delay': 8720.4, ...}, ...}
+day = 'day9'
+
+    @pytest.mark.parametrize("day", DAYS)
+    def test_day(results, day):
+        m = results[day]
+        assert "error" not in m, f"sumo failed: {m.get('error')}"
+        assert m["teleports"] == 0, f"{m['teleports']} teleports (gridlock)"
+>       assert m["arrived"] == m["loaded"], f"only {m['arrived']} of {m['loaded']} vehicles got through by 11:00"
+E       AssertionError: only 7058 of 9099 vehicles got through by 11:00
+E       assert 7058 == 9099
+
+test_plan.py:160: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_plan.py::test_controller_rules
+PASSED test_plan.py::test_sealed_days_found
+FAILED test_plan.py::test_day[day1] - AssertionError: only 7066 of 9326 vehicles got through by 11:00
+assert 7066 == 9326
+FAILED test_plan.py::test_day[day10] - AssertionError: only 7029 of 9238 vehicles got through by 11:00
+assert 7029 == 9238
+FAILED test_plan.py::test_day[day2] - AssertionError: only 6755 of 8576 vehicles got through by 11:00
+assert 6755 == 8576
+FAILED test_plan.py::test_day[day3] - AssertionError: only 6843 of 8800 vehicles got through by 11:00
+assert 6843 == 8800
+FAILED test_plan.py::test_day[day4] - AssertionError: only 6963 of 9109 vehicles got through by 11:00
+assert 6963 == 9109
+FAILED test_plan.py::test_day[day5] - AssertionError: only 6929 of 9052 vehicles got through by 11:00
+assert 6929 == 9052
+FAILED test_plan.py::test_day[day6] - AssertionError: only 6972 of 9293 vehicles got through by 11:00
+assert 6972 == 9293
+FAILED test_plan.py::test_day[day7] - AssertionError: only 6788 of 8815 vehicles got through by 11:00
+assert 6788 == 8815
+FAILED test_plan.py::test_day[day8] - AssertionError: only 6974 of 8972 vehicles got through by 11:00
+assert 6974 == 8972
+FAILED test_plan.py::test_day[day9] - AssertionError: only 7058 of 9099 vehicles got through by 11:00
+assert 7058 == 9099
+=================== 10 failed, 2 passed in 68.69s (0:01:08) ====================

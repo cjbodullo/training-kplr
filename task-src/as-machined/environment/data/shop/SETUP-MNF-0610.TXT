@@ -1,0 +1,12 @@
+MNF-0610  MANIFOLD PLATE      6061-T6      programs O1610 (OP10), O1620 (OP20)
+
+stock: saw cut blank, measured 124.0 x 84.0 x 31.0 (X x Y x Z as loaded in OP10)
+
+OP10  O1610  G54
+  blank in vise: left end on stop, back face on fixed jaw, bottom on parallels.
+
+OP20  O1620  G55
+  turn the part over about its long (X) axis. finished top face goes down on the
+  parallels, the finished front face (the OP10 Y0 side) goes against the fixed jaw,
+  finished left end against the stop. the stop and the jaw only touch the walls cut
+  by the OP10 profile.

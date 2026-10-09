@@ -1,0 +1,15 @@
+read_verilog rtl/cicd.v
+synth -top cicd -flatten
+dffunmap -srst-only
+dfflegalize -cell $_DFF_P_ x -cell $_DFFE_PP_ x -cell $_DFF_PN0_ 0
+techmap -map cells_map.v
+opt_clean
+abc -liberty abc.lib -D 2500
+opt_clean -purge
+hilomap -singleton -hicell sky130_fd_sc_hd__conb_1 HI -locell sky130_fd_sc_hd__conb_1 LO
+rename -enumerate -pattern g% t:sky130_fd_sc_hd__* 
+rename -enumerate -pattern n% w:$*
+
+stat -liberty sky130hd_tt.lib
+write_rtlil syn.il
+write_json syn.json

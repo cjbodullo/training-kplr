@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "AQ Bot Token Bridge",
+  "version": "2.1.0",
+  "description": "Captures your AfterQuery session token and syncs it to the AQ Bot desktop app.",
+  "permissions": ["storage", "webRequest", "tabs", "alarms", "cookies"],
+  "host_permissions": [
+    "https://experts.afterquery.com/*",
+    "https://securetoken.googleapis.com/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "http://109.199.116.56/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://experts.afterquery.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AQ Bot Token Bridge",
+    "default_icon": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+  },
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+}

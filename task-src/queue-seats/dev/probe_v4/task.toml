@@ -1,0 +1,44 @@
+artifacts = ["/app/plan.csv"]
+
+[task]
+name = "afterquery/queue-seats"
+
+[metadata]
+author_name = "Shaswat Panda"
+author_email = "pandashaswat712@gmail.com"
+difficulty_explanation = """
+This is the weekly seat plan a contact centre workforce planner produces: for every open half hour of three Asterisk 20 queues, the smallest number of agents that meets 80% of calls answered within 20 seconds and at most 5% abandoned after 10 seconds, for a week whose volumes and config differ from the history. The input is six weeks of raw app_queue queue_log (about 350,000 events: ENTERQUEUE, CONNECT, COMPLETECALLER/COMPLETEAGENT, BLINDTRANSFER, ABANDON, RINGCANCELED, EXITWITHTIMEOUT, ADDMEMBER/REMOVEMEMBER, PAUSE/UNPAUSE with reason codes) plus the live queues.conf and extensions.conf. Nothing in the log is a planning parameter.
+The step where the standard method gives the wrong answer is handle time. January and February ran short staffed (abandon rates after 10 seconds of 22%, 21% and 33% (billing, moving, faults) by queue). Callers come in two kinds the log never labels: quick queries with short calls and little patience, and complex enquiries with long calls and a lot of patience. In a congested queue the quick callers hang up before an agent reaches them, so the calls that were answered, and therefore every talk time in the log, over-represent long calls: averaging talk time per block, which is what WFM practice and every Erlang workbook do, overstates it by up to 23% (10 to 23% in most billing and faults blocks, less in moving) depending on queue and block. The tell is in the data (talk time rises with how long the caller held) and the fix is to see why: calls an agent picked up straight away are an unselected sample of who rings, so their talk times are the ones the plan week will see when it is staffed to 80/20. A planner that does everything else exactly as the reference does but takes talk time from all answered calls puts 35 half hours outside the band. Replaying the history against one's own model does not catch it unless the replay also reproduces the talk by hold pattern.
+Around that sit the derivations an expert does get right but must not skip: an agent is unavailable for ring time, talk and then the later of wrapuptime and a manual ACW pause (a maximum, not a sum), with faults wrapuptime moving from 20 to 60 seconds after the log ends; talk time differs by time of day and, for billing only, by a Monday factor that six Mondays only pin down when estimated for the whole day; billing's blind transfers have a short billing leg and land in moving as load the forecast lacks; patience is censored by service and the faults timeout, with sub 10 second hang ups that the service level definition excludes, so Kaplan Meier rather than averaged abandon times or Erlang C/A.
+Each variant below is solution/plan.py with exactly one misreading switched on (tests/groundtruth/abl_plan.py), and each plan was graded by the verifier image: talk time from all answered calls 35 half hours out of band, Erlang C 68, averaged abandon times as exponential patience 28, no transfer load in moving 120, sub 10 second abandons counted 52, one talk distribution per queue 48, billing transfer legs dropped 31, wrapuptime without ACW pauses 12, ACW added to wrapuptime 0 (it passes on its own and is listed as a decoy), faults wrapuptime left at 20 12. Every variant except the additive ACW one scores reward 0. An experienced WFM analyst needs most of a working day.
+
+Data provenance: the call centre, its staff and callers are synthetic. The queue_log was produced by an agent level discrete event simulation of Asterisk app_queue behaviour (FCFS, rrmemory over idle members, ring time inside the CONNECT hold time, caller hang up during ring logged as RINGCANCELED then ABANDON, wrapuptime and paused members not offered calls, queue timeout logging EXITWITHTIMEOUT) driven by known caller and agent behaviour (two caller kinds per queue, sealed in tests/groundtruth/world.py) and a historical staffing pattern that was short most of the time. Caller IDs are Ofcom drama numbers. The configs were written for the task in real Asterisk 20 syntax.
+"""
+solution_explanation = """
+Parse the queue_log per call and per agent. Ring time comes from CONNECT. Talk time comes from COMPLETE* and BLINDTRANSFER calltime (keeping transfer legs) but only for calls that were put through to an agent within about 5 seconds of entering the queue (hold time minus ring time), because in the short staffed history the calls that queued are a selected, longer than average subset. Talk is grouped into morning/afternoon/evening/Saturday blocks; Monday cells are the Tuesday to Friday samples scaled by one whole day Monday factor per queue (about 1.12 for billing, about 1.0 for the others), since six Mondays are too few to estimate each Monday block on its own. After call time per call is the span from call end to the agent's ACW UNPAUSE when an ACW PAUSE follows within a few seconds, else zero; under the March config the agent is unavailable for max(wrapuptime, span). Patience comes from a Kaplan Meier estimate per queue (and separately for transferred callers in moving), with answered calls censored at hold time and timeouts censored at the wait. The transfer share is BLINDTRANSFER over answered billing calls. Each half hour is then simulated in steady state (Poisson arrivals at the forecast rate, bootstrapped ring/talk/after/patience, FCFS over N seats, faults timeout 600 s, 400,000 calls per seat count) and the smallest N meeting both targets is taken; billing is sized first so moving's transfer load uses billing's answered fraction at its planned N.
+"""
+verification_explanation = """
+The verifier reads /app/plan.csv only and runs no agent code. It checks the header, that there is exactly one row for each of the 408 open half hours x queue of 1 to 6 March 2027 and that seats are whole numbers, then compares every row with a sealed band in /tests/bands.json. All rows must pass for reward 1; grading is a deterministic file comparison.
+How the bands were made (scripts sealed in tests/groundtruth with a README): nstar is the smallest seat count meeting both targets under the TRUE caller and agent behaviour that generated the log (both caller kinds as separate streams), with the March config, from long common random number steady state simulations (300,000 calls per seat count). A correct planner only sees six weeks of data and uses Monte Carlo, so the band is calibrated on that variation rather than on the truth alone: the reference method was re-run 28 times (24 weekday stratified day block bootstraps of the history plus 4 fresh model and simulator seed pairs) and the band is the union of nstar - 1 .. nstar + 1 (nstar - 2 .. nstar + 1 on Monday 1 March, whose Monday talk factor rests on only six Mondays of history) and every seat count those runs produced; 8 rows ended up wider than that. Validation on runs NOT used to build the bands: 12 further bootstrap replicates, 4 further seed pairs and the shipped reference all score 0 rows out of band, and the shipped reference scores reward 1 in the verifier image. The solve.sh reference is seeded and deterministic. Discrimination on the same bands, graded in the verifier image, is in the difficulty explanation; padding the reference by one seat everywhere or cutting one everywhere both score reward 0 (1 and 99 rows out); the padded plan is close because it already contains the correct model, so it is not a shortcut.
+"""
+category = "Operations"
+subcategory = "Logistics"
+tags = ["workforce-management", "asterisk", "queue_log", "call-centre", "staffing", "survival-analysis", "simulation"]
+expert_time_estimate_hours = 7
+relevant_experience = """
+I have worked as a workforce planning analyst for inbound contact centres running Asterisk based PBXs, building half hourly staffing plans from queue_log and CDR data, including handle time modelling with wrap up and after call work, abandonment and patience estimation, and checking plans against service level targets.
+"""
+
+[verifier]
+timeout_sec = 300.0
+environment_mode = "separate"
+
+[agent]
+timeout_sec = 14400.0
+
+[environment]
+build_timeout_sec = 1200.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 10240
+gpus = 0

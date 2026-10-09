@@ -1,0 +1,4 @@
+FROM python:3.13-slim-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends xz-utils && rm -rf /var/lib/apt/lists/*
+COPY etcd-v3.5.17-linux-amd64/etcd etcd-v3.5.17-linux-amd64/etcdctl etcd-v3.5.17-linux-amd64/etcdutl tools/etcd-dump-logs tools/etcd-dump-db /usr/local/bin/
+WORKDIR /gen
