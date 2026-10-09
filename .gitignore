@@ -43,3 +43,6 @@ task-src/*/dev/*.lib
 **/sessions/
 *.jsonl
 claude-code.txt
+
+# deliverable bundles
+tasks/
